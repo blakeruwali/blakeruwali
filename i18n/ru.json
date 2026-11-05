@@ -20,7 +20,7 @@
   "cta_story": "Моя история",
   "portrait_caption": "Блейк Рували, основатель Techeo и Home+ Air & Heat",
   "stats_label": "Коротко",
-  "stat1": "по 119 отзывам в Google",
+  "stat1": "по {reviews} отзывам в Google",
   "stat2": "основанных компаний",
   "stat3": "округов: Нассау, Саффолк и весь Нью-Йорк",
   "stat4_num": "4 000+",

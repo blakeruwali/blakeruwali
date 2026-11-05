@@ -20,7 +20,7 @@
   "cta_story": "Hikâyemi okuyun",
   "portrait_caption": "Techeo ve Home+ Air & Heat'in kurucusu Blake Ruwali",
   "stats_label": "Bir bakışta",
-  "stat1": "119 Google yorumundan",
+  "stat1": "{reviews} Google yorumundan",
   "stat2": "kurulan şirket",
   "stat3": "hizmet verilen ilçe: Nassau, Suffolk ve New York City'nin tamamı",
   "stat4_num": "4.000+",

@@ -20,7 +20,7 @@
   "cta_story": "私のストーリーを読む",
   "portrait_caption": "Techeo と Home+ Air & Heat の創業者、ブレイク・ルワリ",
   "stats_label": "ひと目でわかる数字",
-  "stat1": "Google のレビュー 119 件",
+  "stat1": "Google のレビュー {reviews} 件",
   "stat2": "社を創業",
   "stat3": "郡で対応：ナッソー、サフォーク、ニューヨーク市全域",
   "stat4_num": "4,000+",

@@ -20,7 +20,7 @@
   "cta_story": "阅读我的故事",
   "portrait_caption": "Blake Ruwali，Techeo 与 Home+ Air & Heat 创始人",
   "stats_label": "概览",
-  "stat1": "来自 119 条 Google 评价",
+  "stat1": "来自 {reviews} 条 Google 评价",
   "stat2": "家创办的公司",
   "stat3": "个服务县：纳苏、萨福克及纽约市全境",
   "stat4_num": "4,000+",
