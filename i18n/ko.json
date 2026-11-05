@@ -20,7 +20,7 @@
   "cta_story": "제 이야기 읽기",
   "portrait_caption": "Techeo와 Home+ Air & Heat의 창업자 블레이크 루왈리",
   "stats_label": "한눈에 보기",
-  "stat1": "Google 리뷰 119개 기준",
+  "stat1": "Google 리뷰 {reviews}개 기준",
   "stat2": "개 회사 창업",
   "stat3": "개 카운티 서비스: 나소, 서퍽, 뉴욕시 전역",
   "stat4_num": "4,000+",

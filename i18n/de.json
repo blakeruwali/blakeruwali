@@ -20,7 +20,7 @@
   "cta_story": "Meine Geschichte lesen",
   "portrait_caption": "Blake Ruwali, Gründer von Techeo und Home+ Air & Heat",
   "stats_label": "Auf einen Blick",
-  "stat1": "aus 119 Google-Bewertungen",
+  "stat1": "aus {reviews} Google-Bewertungen",
   "stat2": "gegründete Unternehmen",
   "stat3": "Countys im Einsatzgebiet: Nassau, Suffolk und ganz New York City",
   "stat4_num": "4.000+",

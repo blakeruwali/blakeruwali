@@ -3,12 +3,17 @@
 
     python3 scripts/build_i18n.py
 
-Reads i18n/template.html, i18n/style.html, i18n/graph.json and i18n/<code>.json, then writes
+Reads i18n/template.html, i18n/style.html, i18n/graph.json, i18n/site.json and
+i18n/<code>.json, then writes
 index.html (English) and <path>/index.html for every other language, plus
 sitemap.xml. Edit the JSON files, never the generated HTML.
 
 Keys ending in _html are inserted as-is (they carry links, so write &amp;
 yourself). Every other key is plain text and is escaped here.
+
+i18n/site.json holds the numbers shared by every language (rating, review count,
+companies, counties). Use them as {{name}} in the template, or as {name} inside a
+translated string, e.g. "from {reviews} Google reviews".
 """
 import json
 import re
@@ -56,6 +61,7 @@ def main():
     template = (I18N / "template.html").read_text(encoding="utf-8")
     style = (I18N / "style.html").read_text(encoding="utf-8")
     graph = json.loads((I18N / "graph.json").read_text(encoding="utf-8"))
+    site = json.loads((I18N / "site.json").read_text(encoding="utf-8"))
     en = json.loads((I18N / "en.json").read_text(encoding="utf-8"))
     data = {code: json.loads((I18N / f"{code}.json").read_text(encoding="utf-8")) for code, *_ in LANGS}
 
@@ -99,7 +105,12 @@ def main():
             "arrow": "←" if rtl else "→",
             "code_upper": code.upper(),
         }
+        for k, v in site.items():
+            values.setdefault(k, esc(v))
         for k, v in t.items():
+            v = re.sub(r"\{(\w+)\}", lambda m: site[m.group(1)] if m.group(1) in site else m.group(0), v)
+            if re.search(r"\{\w+\}", v):
+                raise SystemExit(f"{code}.json {k}: unknown placeholder in {v!r}")
             values.setdefault(k, v if k.endswith("_html") else esc(v))
 
         def sub(m):

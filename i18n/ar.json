@@ -20,7 +20,7 @@
   "cta_story": "اقرأ قصتي",
   "portrait_caption": "بليك رووالي، مؤسس Techeo وHome+ Air & Heat",
   "stats_label": "لمحة سريعة",
-  "stat1": "من 119 تقييمًا على Google",
+  "stat1": "من {reviews} تقييمًا على Google",
   "stat2": "شركات أسّسها",
   "stat3": "مقاطعات نخدمها: ناساو وسافولك وكل مدينة نيويورك",
   "stat4_num": "+4,000",

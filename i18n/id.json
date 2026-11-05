@@ -20,7 +20,7 @@
   "cta_story": "Baca kisah saya",
   "portrait_caption": "Blake Ruwali, pendiri Techeo dan Home+ Air & Heat",
   "stats_label": "Sekilas",
-  "stat1": "dari 119 ulasan Google",
+  "stat1": "dari {reviews} ulasan Google",
   "stat2": "perusahaan didirikan",
   "stat3": "county yang dilayani: Nassau, Suffolk, dan seluruh NYC",
   "stat4_num": "4.000+",

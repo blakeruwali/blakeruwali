@@ -14,3 +14,7 @@ To add a language: copy `en.json` to `<code>.json`, translate it, and add one li
 to `LANGS` in `scripts/build_i18n.py`. Arabic and Urdu set `"dir": "rtl"`.
 
 `graph.json` is the schema.org data. Each page reuses it with its own ProfilePage URL.
+
+`site.json` holds the numbers every language shares: rating, Google review count,
+companies and counties. Change a number there once and rebuild; all 21 pages pick
+it up. Inside a translation, write `{reviews}` where the number goes.
