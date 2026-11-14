@@ -229,4 +229,43 @@
   .shot b { color: var(--ink); }
   .shot b::before { color: var(--cyan-ink); }
   .shot span { color: var(--ink-soft); }
+
+  /* Day 1 posts (2026-11-14) */
+  .day1 { margin-top: 40px; padding: clamp(20px, 3vw, 32px); border-radius: 20px; background: var(--band); box-shadow: inset 0 0 0 1px var(--line); }
+  .day1-head { display: grid; gap: 10px; justify-items: start; }
+  .day1 h3 { margin: 4px 0 0; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.08; max-width: 24ch; }
+  .day1 .sub { margin: 0; color: var(--soft); max-width: 60ch; }
+  .day1-row { margin-top: 24px; }
+  @media (min-width: 900px) { .day1-row { grid-template-columns: repeat(4, 1fr); } }
+  .thumb { position: relative; display: block; }
+  .thumb img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 30%; }
+  .thumb .play { position: absolute; left: 50%; top: 50%; width: 64px; height: 64px; margin: -32px 0 0 -32px; background: rgba(9,14,37,.55); box-shadow: inset 0 0 0 2px #FFFFFF; }
+  .thumb .play::after { left: 26px; top: 19px; border-top-width: 13px; border-bottom-width: 13px; border-left: 19px solid #FFFFFF; }
+  .ai-tag { position: absolute; inset-inline-end: 10px; top: 10px; padding: 5px 8px 4px; border-radius: 6px; background: rgba(9,14,37,.82); color: #FFFFFF; font-size: 11px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; }
+  .also-on { margin: 18px 0 0; color: var(--soft); font-size: 15px; }
+  .also-on a { color: var(--text); font-weight: 700; text-decoration-color: var(--cyan); text-underline-offset: 3px; }
+
+  /* Homets gradient theme (2026-11-14): navy, orange→magenta gradient, yellow. Overrides the cyan tokens above. */
+  :root {
+    --bg: #090E25; --band: #0D1433; --card: #131B40; --line: #1F2852; --line2: #2C3868;
+    --soft: #C3C8DA; --muted: #8A91AD;
+    --cyan: #FF7E2E; --cyan-soft: rgba(255, 126, 46, .14); --cyan-glow: rgba(157, 27, 120, .55);
+    --grad: linear-gradient(100deg, #C24A00, #9D1B78); --yellow: #FACC15;
+    --display: "Archivo Black", "Arial Black", var(--font);
+    --cyan-ink: #C24A00;
+  }
+  .hero h1, .wrap > h2, section h2, .guide h2 { font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: -.2px; }
+  .hero h1 { line-height: 1.06; }
+  .pill, .btn, .skip:focus { background: var(--grad); color: #FFFFFF; }
+  .btn:hover { color: #FFFFFF; }
+  .btn-ghost { background: transparent; box-shadow: inset 0 0 0 2px var(--cyan); }
+  .brand::after { background: var(--grad); }
+  .stat .num { color: var(--yellow); }
+  .hero::before { background: radial-gradient(circle at 60% 40%, rgba(249,116,21,.18), transparent 55%), radial-gradient(circle at 30% 70%, rgba(157,27,120,.22), transparent 60%); }
+  .video-frame { background: radial-gradient(circle, rgba(157,27,120,.28), transparent 60%), var(--band); }
+  .guide-card { box-shadow: inset 0 0 0 2px transparent; background: linear-gradient(var(--band), var(--band)) padding-box, var(--grad) border-box; border: 2px solid transparent; }
+  .guide-card::before { background: radial-gradient(circle, rgba(157,27,120,.32), transparent 62%); }
+  .timeline { border-image: linear-gradient(to bottom, var(--line2), #C24A00, #9D1B78) 1; }
+  .timeline li:last-child::before { background: var(--grad); border-color: transparent; }
+  .shot:hover { box-shadow: inset 0 0 0 2px var(--cyan-ink), 0 24px 50px -28px rgba(194,74,0,.4); }
 </style>
