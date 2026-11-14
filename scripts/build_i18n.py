@@ -9,13 +9,6 @@ sitemap.xml. Edit the JSON files, never the generated HTML.
 
 Keys ending in _html are inserted as-is (they carry links, so write &amp;
 yourself). Every other key is plain text and is escaped here.
-
-Two designs live side by side while the translations catch up:
-- a language file with "design": "v2" (en.json today) is checked against en.json and
-  rendered with i18n/template.html + i18n/style.html (the dark tech redesign);
-- every other language file is checked against i18n/legacy/en.json and rendered with
-  i18n/legacy/template.html + i18n/legacy/style.html (the October 2026 design).
-To move a language to the new design, translate en.json into it, keep "design": "v2".
 """
 import json
 import re
@@ -60,19 +53,10 @@ def esc(s):
 
 
 def main():
-    designs = {
-        "v2": (
-            (I18N / "template.html").read_text(encoding="utf-8"),
-            (I18N / "style.html").read_text(encoding="utf-8"),
-            json.loads((I18N / "en.json").read_text(encoding="utf-8")),
-        ),
-        "legacy": (
-            (I18N / "legacy" / "template.html").read_text(encoding="utf-8"),
-            (I18N / "legacy" / "style.html").read_text(encoding="utf-8"),
-            json.loads((I18N / "legacy" / "en.json").read_text(encoding="utf-8")),
-        ),
-    }
+    template = (I18N / "template.html").read_text(encoding="utf-8")
+    style = (I18N / "style.html").read_text(encoding="utf-8")
     graph = json.loads((I18N / "graph.json").read_text(encoding="utf-8"))
+    en = json.loads((I18N / "en.json").read_text(encoding="utf-8"))
     data = {code: json.loads((I18N / f"{code}.json").read_text(encoding="utf-8")) for code, *_ in LANGS}
 
     hreflang = "\n".join(
@@ -81,10 +65,6 @@ def main():
 
     for code, path, tag, nolatin in LANGS:
         t = data[code]
-        design = t.get("design", "legacy")
-        if design not in designs:
-            raise SystemExit(f"{code}.json has unknown design {design!r}")
-        template, style, en = designs[design]
         missing = sorted(set(en) - set(t))
         if missing:
             raise SystemExit(f"{code}.json is missing keys: {', '.join(missing)}")
