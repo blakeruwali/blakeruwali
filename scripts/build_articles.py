@@ -145,17 +145,52 @@ def jsonld(a):
     return json.dumps({"@context": "https://schema.org", "@graph": graph}, indent=2, ensure_ascii=False)
 
 
-def guide_cards(articles, exclude):
-    cards = []
-    for g in articles:
-        if g["slug"] == exclude:
-            continue
-        cards.append(
-            f'<a class="g-card" href="{g["slug"]}"><span class="g-kind">{"Start here" if g["slug"] == PILLAR else "Guide"} · {g["minutes"]} min</span>'
-            f'<span class="g-title">{html.escape(g["title"])}</span><span class="g-desc">{html.escape(g["desc"])}</span>'
-            '<span class="g-go">Read →</span></a>'
-        )
-    return "\n".join(cards)
+# Topic groups for the guide index. A guide not listed here lands in "More guides".
+TOPICS = [
+    ("Start here", ["/ai-for-the-trades/", "/will-ai-replace-hvac-techs/", "/ai-tools-for-hvac-owners/", "/ai-cost-for-hvac-companies/", "/ai-partner-questions/"]),
+    ("By trade", ["/ai-for-hvac-contractors/", "/ai-for-plumbers/", "/ai-for-electricians/", "/ai-for-roofers/"]),
+    ("Phones and booking", ["/missed-calls-ai/", "/ai-receptionist-vs-answering-service/", "/ai-online-booking/"]),
+    ("Estimates and sales", ["/ai-estimates/", "/ai-estimate-follow-up/", "/lidar-manual-j/", "/ai-maintenance-agreements/"]),
+    ("Marketing and reviews", ["/ai-marketing-for-hvac/", "/ai-search-for-contractors/", "/ai-google-reviews/"]),
+    ("Running the shop", ["/ai-with-servicetitan/", "/chatgpt-for-contractors/", "/chatgpt-prompts-for-hvac/", "/ai-training-new-techs/"]),
+]
+RELATED_MAX = 6
+
+
+def topic_of(slug):
+    return next((name for name, slugs in TOPICS if slug in slugs), "More guides")
+
+
+def card(g):
+    return (
+        f'<a class="g-card" href="{g["slug"]}"><span class="g-kind">{topic_of(g["slug"])} · {g["minutes"]} min</span>'
+        f'<span class="g-title">{html.escape(g["title"])}</span><span class="g-desc">{html.escape(g["desc"])}</span>'
+        '<span class="g-go">Read →</span></a>'
+    )
+
+
+def guide_index(articles, exclude):
+    """Pillar page: every guide, grouped by topic."""
+    by_slug = {g["slug"]: g for g in articles}
+    groups = [(name, [by_slug[s] for s in slugs if s in by_slug and s != exclude]) for name, slugs in TOPICS]
+    listed = {s for _, slugs in TOPICS for s in slugs}
+    rest = [g for g in articles if g["slug"] not in listed and g["slug"] != exclude]
+    if rest:
+        groups.append(("More guides", rest))
+    return "\n".join(
+        f'<h3 class="g-topic">{name}</h3>\n<div class="g-grid">\n' + "\n".join(card(g) for g in items) + "\n</div>"
+        for name, items in groups if items
+    )
+
+
+def related_cards(articles, current):
+    """Other pages: same-topic guides first, then the pillar, up to RELATED_MAX."""
+    topic = topic_of(current)
+    same = [g for g in articles if g["slug"] != current and topic_of(g["slug"]) == topic]
+    pillar = [g for g in articles if g["slug"] == PILLAR and g["slug"] != current and g not in same]
+    others = [g for g in articles if g["slug"] != current and g not in same and g not in pillar]
+    picks = (same + pillar + others)[:RELATED_MAX]
+    return '<div class="g-grid">\n' + "\n".join(card(g) for g in picks) + "\n</div>"
 
 
 def page(a, articles, style):
@@ -163,7 +198,7 @@ def page(a, articles, style):
     crumbs = '<a href="/">Blake Ruwali</a> <span aria-hidden="true">/</span> ' + (
         "AI for the trades" if is_pillar else f'<a href="{PILLAR}">AI for the trades</a>')
     role = a["byline"].replace("Blake Ruwali, ", "")
-    more_h = "Every guide in the series" if is_pillar else "More from AI for the trades"
+    more_h = "Every guide in the series" if is_pillar else "Keep reading"
     return f"""<!doctype html>
 <html lang="en" dir="ltr">
 <head>
@@ -232,9 +267,8 @@ def page(a, articles, style):
 
   <section class="wrap more-guides" aria-labelledby="more-h">
     <h2 id="more-h">{more_h}</h2>
-    <div class="g-grid">
-{guide_cards(articles, a["slug"])}
-    </div>
+{guide_index(articles, a["slug"]) if is_pillar else related_cards(articles, a["slug"])}
+{"" if is_pillar else f'    <p class="all-guides"><a class="btn btn-ghost" href="{PILLAR}#more-h">All {len(articles)} guides →</a></p>'}
   </section>
 </main>
 <footer class="foot">
