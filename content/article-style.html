@@ -96,4 +96,22 @@
   .foot nav { display: flex; flex-wrap: wrap; gap: 12px 20px; }
   .foot nav a { color: var(--soft); text-decoration: none; border-bottom: 1px solid var(--line2); }
   .foot nav a:hover { color: var(--cyan); border-color: var(--cyan); }
+
+  /* Homets gradient theme (2026-11-14): matches the homepage. Overrides the cyan tokens above. */
+  :root {
+    --bg: #090E25; --band: #0D1433; --card: #131B40; --line: #1F2852; --line2: #2C3868;
+    --soft: #C3C8DA; --muted: #8A91AD;
+    --cyan: #FF7E2E; --cyan-soft: rgba(255, 126, 46, .14); --cyan-glow: rgba(157, 27, 120, .55);
+    --grad: linear-gradient(100deg, #C24A00, #9D1B78); --yellow: #FACC15;
+    --display: "Archivo Black", "Arial Black", var(--font, sans-serif);
+  }
+  .pill, .btn, .skip:focus { background: var(--grad); color: #FFFFFF; }
+  .btn:hover, .pill-sm:hover { color: #FFFFFF; }
+  .btn-ghost { background: transparent; }
+  .brand::after { background: var(--grad); }
+  .a-head h1, .prose h2 { font-family: var(--display); font-weight: 400; }
+  .prose h2::before { background: var(--grad); }
+  .article::before { background: radial-gradient(circle at 60% 40%, rgba(249,116,21,.16), transparent 55%), radial-gradient(circle at 30% 70%, rgba(157,27,120,.2), transparent 60%); }
+  .guide-card { box-shadow: none; border: 2px solid transparent; background: linear-gradient(var(--band), var(--band)) padding-box, var(--grad) border-box; }
+  .guide-card::before { background: radial-gradient(circle, rgba(157,27,120,.32), transparent 62%); }
 </style>

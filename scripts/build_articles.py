@@ -216,10 +216,10 @@ def page(a, articles, style):
 <meta property="article:published_time" content="{PUBLISHED}">
 <meta name="twitter:card" content="summary">
 <meta name="author" content="Blake Ruwali">
-<meta name="theme-color" content="#080A0E">
+<meta name="theme-color" content="#090E25">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {jsonld(a)}
 </script>
