@@ -133,6 +133,9 @@ def main():
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(html, encoding="utf-8")
 
+    import build_articles  # same folder; builds the /ai-for-the-trades/ guides and llms.txt
+    guide_urls = build_articles.main()
+
     lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
@@ -143,6 +146,8 @@ def main():
             lines.append(f'    <xhtml:link rel="alternate" hreflang="{tag2}" href="{url_for(p2)}"/>')
         lines.append(f'    <xhtml:link rel="alternate" hreflang="x-default" href="{url_for("")}"/>')
         lines.append("  </url>")
+    for u in guide_urls:
+        lines.append(f"  <url><loc>{u}</loc></url>")
     lines.append("</urlset>")
     (ROOT / "sitemap.xml").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(f"built {len(LANGS)} pages")
