@@ -24,6 +24,11 @@ export function svg(tag, attrs = {}) {
 }
 
 export const DASH = "—";
+
+// Only render links that are plain https (data comes from APIs and CSV imports).
+export function safeHref(v) {
+  try { return new URL(v).protocol === "https:" ? v : null; } catch { return null; }
+}
 const nf = new Intl.NumberFormat("en-US");
 
 export function n(v, digits = 0) {

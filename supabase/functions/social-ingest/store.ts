@@ -1,6 +1,7 @@
 // Writes one collector result to Postgres with the service role.
 import type { SupabaseClient } from "npm:@supabase/supabase-js@2.45.4";
 import type { CollectResult, PostMetricRow } from "./types.ts";
+import { redact } from "./http.ts";
 
 const nyDay = (iso?: string) =>
   iso ? new Date(iso).toLocaleDateString("en-CA", { timeZone: "America/New_York" }) : undefined;
@@ -65,7 +66,7 @@ export async function logRun(
 ): Promise<void> {
   const { error } = await db.from("ingest_runs").insert({
     channel_id: channel, started_at: startedAt, finished_at: new Date().toISOString(),
-    status, rows_written: rows, message: message?.slice(0, 500) ?? null,
+    status, rows_written: rows, message: redact(message)?.slice(0, 500) ?? null,
   });
   if (error) console.error(`ingest_runs insert failed for ${channel}: ${error.message}`);
 }

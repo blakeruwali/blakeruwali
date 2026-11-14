@@ -1,5 +1,5 @@
 // Goal hero, KPI strip, channel cards, comparison bars.
-import { h, svg, int, n, pct, secs, signed, compact, sum, replace, DASH } from "./util.js";
+import { h, svg, int, n, pct, secs, signed, compact, sum, replace, safeHref, DASH } from "./util.js";
 
 export function renderGoal(goals, rowsEl, daysEl) {
   const order = ["facebook", "instagram"];
@@ -75,7 +75,7 @@ export function renderChannels(summary, daily, el) {
     const stat = (k, v, cls) => h("div", {}, h("dt", { text: k }), h("dd", { class: cls, text: v }));
     return h("article", { class: `ch${wide ? " wide" : ""}`, "aria-label": s.label },
       h("div", { class: "ch-head" },
-        h("div", {}, h("h3", { text: s.label }), h("a", { href: s.profile_url, target: "_blank", rel: "noopener noreferrer", text: s.handle })),
+        h("div", {}, h("h3", { text: s.label }), h("a", { href: safeHref(s.profile_url), target: "_blank", rel: "noopener noreferrer", text: s.handle })),
         statusChip(s)),
       h("div", { class: "followers" },
         h("span", { class: "n num", text: int(s.followers_now) }),

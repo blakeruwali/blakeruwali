@@ -1,12 +1,12 @@
 // Top posts, cross-post matrix, Comment AI table, data-source cards.
-import { h, int, n, pct, secs, when, ago, replace, DASH } from "./util.js";
+import { h, int, n, pct, secs, when, ago, replace, safeHref, DASH } from "./util.js";
 import { statusChip } from "./render-top.js";
 
 const FORMAT = { reel: "Reel", short: "Short", video: "Video", long_video: "Long video", carousel: "Carousel", image: "Image", text: "Post", story: "Story", pin: "Pin", thread: "Thread" };
 
 function postTitle(p) {
-  const title = p.url
-    ? h("a", { href: p.url, target: "_blank", rel: "noopener noreferrer", class: "t", text: p.title })
+  const title = safeHref(p.url)
+    ? h("a", { href: safeHref(p.url), target: "_blank", rel: "noopener noreferrer", class: "t", text: p.title })
     : h("span", { class: "t", text: p.title });
   return h("td", {}, title, h("div", { class: "sub", text: `${FORMAT[p.format] ?? p.format} · ${when(p.posted_at)}` }));
 }
@@ -83,7 +83,7 @@ export function renderAi(comments, filter, statsEl, table, onMark) {
       h("td", { text: c.channel_label }),
       h("td", { text: c.author_handle ?? DASH }),
       h("td", { class: "quote", text: c.body }),
-      h("td", {}, c.post_url ? h("a", { href: c.post_url, target: "_blank", rel: "noopener noreferrer", text: c.post_title ?? "post" }) : (c.post_title ?? DASH)),
+      h("td", {}, safeHref(c.post_url) ? h("a", { href: safeHref(c.post_url), target: "_blank", rel: "noopener noreferrer", text: c.post_title ?? "post" }) : (c.post_title ?? DASH)),
       h("td", {},
         h("span", { class: `chip ${c.guide_status === "manual" ? "sent" : c.guide_status}`, text: STATUS[c.guide_status] ?? c.guide_status, title: c.guide_error ?? "" }),
         c.guide_sent_at ? h("div", { class: "sub", text: `${c.guide_via ?? ""} ${when(c.guide_sent_at)}`.trim() }) : null,

@@ -145,6 +145,8 @@ function wireSignIn() {
 }
 
 async function main() {
+  // GitHub Pages cannot send frame-ancestors, so refuse to run inside a frame.
+  if (window.top !== window.self) { document.body.replaceChildren(); return; }
   const cfg = window.STUDIO_CONFIG ?? {};
   if (!cfg.supabaseUrl || !cfg.supabaseAnonKey || !window.supabase) {
     $("gate-text").textContent = "Not set up yet: add the Supabase URL and anon key to studio/config.js.";

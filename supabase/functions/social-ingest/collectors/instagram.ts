@@ -5,6 +5,8 @@ import type { AiCommentRow, Collector, CollectorContext, PostFormat, PostMetricR
 import { emptyResult } from "../types.ts";
 
 const BASE = "https://graph.instagram.com/v23.0";
+// Token goes in a header, never the URL, so it cannot leak through error messages or logs.
+const auth = (token: string) => ({ headers: { Authorization: `Bearer ${token}` } });
 
 interface IgMedia {
   id: string;
@@ -60,20 +62,19 @@ export function mapIgInsights(m: IgMedia, insights: IgInsight[]): PostMetricRow 
 
 async function insightsFor(ctx: CollectorContext, token: string, m: IgMedia): Promise<IgInsight[]> {
   const names = igMetricNames(igFormat(m));
-  const url = (metrics: string[]) =>
-    `${BASE}/${m.id}/insights?metric=${metrics.join(",")}&access_token=${encodeURIComponent(token)}`;
+  const url = (metrics: string[]) => `${BASE}/${m.id}/insights?metric=${metrics.join(",")}`;
   try {
-    return (await getJson<{ data: IgInsight[] }>(ctx.fetch, url(names))).data ?? [];
+    return (await getJson<{ data: IgInsight[] }>(ctx.fetch, url(names), auth(token))).data ?? [];
   } catch {
     // Some metrics are not offered for every media type; fall back to the safe core set.
-    return (await getJson<{ data: IgInsight[] }>(ctx.fetch, url(["views", "reach"]))).data ?? [];
+    return (await getJson<{ data: IgInsight[] }>(ctx.fetch, url(["views", "reach"]), auth(token))).data ?? [];
   }
 }
 
 async function aiCommentsFor(ctx: CollectorContext, token: string, m: IgMedia): Promise<AiCommentRow[]> {
   const res = await getJson<{ data: IgComment[] }>(
     ctx.fetch,
-    `${BASE}/${m.id}/comments?fields=id,text,username,timestamp&limit=50&access_token=${encodeURIComponent(token)}`,
+    `${BASE}/${m.id}/comments?fields=id,text,username,timestamp&limit=50`, auth(token),
   );
   return (res.data ?? []).filter((c) => mentionsAi(c.text)).map((c) => ({
     platform_comment_id: c.id,
@@ -87,11 +88,9 @@ async function aiCommentsFor(ctx: CollectorContext, token: string, m: IgMedia): 
 export const collectInstagram: Collector = async (ctx) => {
   const token = ctx.env("IG_ACCESS_TOKEN");
   if (!token) return emptyResult("instagram", "needs_token", "Set IG_ACCESS_TOKEN");
-  const t = encodeURIComponent(token);
-  const me = await getJson<{ followers_count?: number }>(ctx.fetch, `${BASE}/me?fields=user_id,username,followers_count&access_token=${t}`);
+  const me = await getJson<{ followers_count?: number }>(ctx.fetch, `${BASE}/me?fields=user_id,username,followers_count`, auth(token));
   const media = await getJson<{ data: IgMedia[] }>(
-    ctx.fetch,
-    `${BASE}/me/media?fields=id,caption,media_type,media_product_type,permalink,timestamp&limit=${ctx.maxPosts}&access_token=${t}`,
+    ctx.fetch, `${BASE}/me/media?fields=id,caption,media_type,media_product_type,permalink,timestamp&limit=${ctx.maxPosts}`, auth(token),
   );
   const result = { ...emptyResult("instagram", "ok"), followers: num(me.followers_count) };
   const problems: string[] = [];

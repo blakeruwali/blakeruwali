@@ -7,6 +7,8 @@ import { emptyResult } from "../types.ts";
 const DATA = "https://www.googleapis.com/youtube/v3";
 const DEFAULT_CHANNEL = "UCrvL3rvxM1WMRclSeqYNtXg";
 const SHORT_MAX_SEC = 60;
+// API key goes in a header, never the URL, so it cannot leak through error messages.
+const keyHeader = (key: string) => ({ headers: { "X-goog-api-key": key } });
 
 interface Video {
   id: string;
@@ -63,9 +65,9 @@ async function analyticsByVideo(ctx: CollectorContext, token: string) {
 }
 
 async function aiComments(ctx: CollectorContext, key: string, channel: string): Promise<AiCommentRow[]> {
-  const q = new URLSearchParams({ part: "snippet", allThreadsRelatedToChannelId: channel, maxResults: "100", key });
+  const q = new URLSearchParams({ part: "snippet", allThreadsRelatedToChannelId: channel, maxResults: "100" });
   const res = await getJson<{ items?: { id: string; snippet: { videoId?: string; topLevelComment: { snippet: { textOriginal: string; authorDisplayName?: string; publishedAt: string } } } }[] }>(
-    ctx.fetch, `${DATA}/commentThreads?${q}`,
+    ctx.fetch, `${DATA}/commentThreads?${q}`, keyHeader(key),
   );
   return (res.items ?? [])
     .filter((i) => mentionsAi(i.snippet.topLevelComment.snippet.textOriginal))
@@ -83,16 +85,16 @@ export const collectYouTube: Collector = async (ctx) => {
   if (!key) return emptyResult("youtube", "needs_token", "Set YOUTUBE_API_KEY");
   const channel = ctx.env("YOUTUBE_CHANNEL_ID") ?? DEFAULT_CHANNEL;
   const ch = await getJson<{ items?: { statistics: { subscriberCount?: string }; contentDetails: { relatedPlaylists: { uploads: string } } }[] }>(
-    ctx.fetch, `${DATA}/channels?part=statistics,contentDetails&id=${channel}&key=${key}`,
+    ctx.fetch, `${DATA}/channels?part=statistics,contentDetails&id=${channel}`, keyHeader(key),
   );
   const item = ch.items?.[0];
   if (!item) return emptyResult("youtube", "error", `Channel ${channel} not found`);
   const pl = await getJson<{ items?: { contentDetails: { videoId: string } }[] }>(
-    ctx.fetch, `${DATA}/playlistItems?part=contentDetails&maxResults=${ctx.maxPosts}&playlistId=${item.contentDetails.relatedPlaylists.uploads}&key=${key}`,
+    ctx.fetch, `${DATA}/playlistItems?part=contentDetails&maxResults=${ctx.maxPosts}&playlistId=${item.contentDetails.relatedPlaylists.uploads}`, keyHeader(key),
   );
   const ids = (pl.items ?? []).map((i) => i.contentDetails.videoId);
   const vids = ids.length
-    ? (await getJson<{ items?: Video[] }>(ctx.fetch, `${DATA}/videos?part=snippet,contentDetails,statistics&id=${ids.join(",")}&key=${key}`)).items ?? []
+    ? (await getJson<{ items?: Video[] }>(ctx.fetch, `${DATA}/videos?part=snippet,contentDetails,statistics&id=${ids.join(",")}`, keyHeader(key))).items ?? []
     : [];
 
   const notes: string[] = [];

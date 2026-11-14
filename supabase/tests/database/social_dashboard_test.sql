@@ -1,7 +1,7 @@
 -- Run: supabase test db
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(12);
+select plan(14);
 
 -- start clean inside the transaction (rolled back at the end)
 truncate public.post_metrics, public.posts, public.follower_snapshots, public.ai_comments, public.ingest_runs, public.dashboard_owners cascade;
@@ -36,6 +36,8 @@ select is(public.import_social_snapshot('{"source":"manual","posts":[{"channel":
   '{"followers": 0, "post_metrics": 1}'::jsonb, 'owner can import');
 select is((select follows_per_1k from public.v_channel_summary where channel_id = 'instagram'), 2.00, 'channel follows per 1K = 2 gained / 1000 views');
 select throws_ok($$ select * from public.record_ai_comment('instagram','c1','AI',now()) $$, '42501', null, 'owner cannot call writer RPC either');
+select throws_ok($$ truncate public.posts cascade $$, '42501', null, 'signed-in users cannot truncate');
+select throws_ok($$ update public.ai_comments set body = 'x' $$, '42501', null, 'owner can only change guide columns on comments');
 reset role;
 
 -- AI match rule

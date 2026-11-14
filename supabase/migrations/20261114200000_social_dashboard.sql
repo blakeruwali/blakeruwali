@@ -150,8 +150,14 @@ alter table public.post_metrics enable row level security;
 alter table public.ai_comments enable row level security;
 alter table public.ingest_runs enable row level security;
 
+-- Supabase grants everything to anon/authenticated by default; RLS does not cover TRUNCATE,
+-- so grant back only what the owner page needs.
 revoke all on public.channels, public.follower_snapshots, public.posts, public.post_metrics,
-  public.ai_comments, public.ingest_runs, public.dashboard_owners from anon;
+  public.ai_comments, public.ingest_runs, public.dashboard_owners from anon, authenticated;
+grant select on public.channels, public.follower_snapshots, public.posts, public.post_metrics,
+  public.ai_comments, public.ingest_runs, public.dashboard_owners to authenticated;
+grant insert, update on public.follower_snapshots, public.posts, public.post_metrics to authenticated;
+grant update (guide_status, guide_via, guide_sent_at) on public.ai_comments to authenticated;
 
 create policy owner_read on public.channels           for select to authenticated using ((select public.is_dashboard_owner()));
 create policy owner_read on public.follower_snapshots for select to authenticated using ((select public.is_dashboard_owner()));

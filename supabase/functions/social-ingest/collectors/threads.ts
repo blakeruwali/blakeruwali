@@ -4,6 +4,7 @@ import type { Collector, PostMetricRow } from "../types.ts";
 import { emptyResult } from "../types.ts";
 
 const BASE = "https://graph.threads.net/v1.0";
+const auth = (token: string) => ({ headers: { Authorization: `Bearer ${token}` } });
 
 interface ThreadsPost { id: string; text?: string; media_type?: string; permalink?: string; timestamp?: string }
 interface Insight { name: string; values?: { value: number }[]; total_value?: { value: number } }
@@ -35,21 +36,21 @@ export function mapThreadsPost(p: ThreadsPost, insights: Insight[]): PostMetricR
 export const collectThreads: Collector = async (ctx) => {
   const token = ctx.env("THREADS_ACCESS_TOKEN");
   if (!token) return emptyResult("threads", "needs_token", "Set THREADS_ACCESS_TOKEN");
-  const t = encodeURIComponent(token);
-  const acct = await getJson<{ data: Insight[] }>(ctx.fetch, `${BASE}/me/threads_insights?metric=followers_count&access_token=${t}`);
+  const a = auth(token);
+  const acct = await getJson<{ data: Insight[] }>(ctx.fetch, `${BASE}/me/threads_insights?metric=followers_count`, a);
   const posts = await getJson<{ data: ThreadsPost[] }>(
-    ctx.fetch, `${BASE}/me/threads?fields=id,text,media_type,permalink,timestamp&limit=${ctx.maxPosts}&access_token=${t}`,
+    ctx.fetch, `${BASE}/me/threads?fields=id,text,media_type,permalink,timestamp&limit=${ctx.maxPosts}`, a,
   );
   const result = { ...emptyResult("threads", "ok"), followers: pick(acct.data ?? [], "followers_count") };
   const problems: string[] = [];
   for (const p of posts.data ?? []) {
     try {
       const ins = await getJson<{ data: Insight[] }>(
-        ctx.fetch, `${BASE}/${p.id}/insights?metric=views,likes,replies,reposts,quotes,shares&access_token=${t}`,
+        ctx.fetch, `${BASE}/${p.id}/insights?metric=views,likes,replies,reposts,quotes,shares`, a,
       );
       result.posts.push(mapThreadsPost(p, ins.data ?? []));
       const replies = await getJson<{ data: Reply[] }>(
-        ctx.fetch, `${BASE}/${p.id}/replies?fields=id,text,username,timestamp&access_token=${t}`,
+        ctx.fetch, `${BASE}/${p.id}/replies?fields=id,text,username,timestamp`, a,
       );
       for (const r of replies.data ?? []) {
         if (mentionsAi(r.text)) {

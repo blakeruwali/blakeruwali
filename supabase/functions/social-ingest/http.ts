@@ -17,10 +17,16 @@ export async function getJson<T>(
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
   try {
-    const res = await fetchFn(url, { ...init, signal: ctrl.signal });
+    let res: Response;
+    try {
+      res = await fetchFn(url, { ...init, signal: ctrl.signal });
+    } catch (e) {
+      // Network errors can echo the full URL; never let a key travel on in a message.
+      throw new Error(redact(`${new URL(url).host}: ${(e as Error).message}`));
+    }
     const text = await res.text();
     if (!res.ok) {
-      throw new ApiError(res.status, `${new URL(url).host} ${res.status}: ${summarize(text)}`);
+      throw new ApiError(res.status, redact(`${new URL(url).host} ${res.status}: ${summarize(text)}`));
     }
     return (text ? JSON.parse(text) : {}) as T;
   } finally {
@@ -35,6 +41,14 @@ function summarize(body: string): string {
     if (msg) return String(msg).slice(0, 200);
   } catch { /* not JSON */ }
   return body.slice(0, 200);
+}
+
+const SECRET_PARAM = /([?&](?:access_token|key|client_secret|refresh_token)=)[^&\s)"']+/gi;
+const BEARER = /(Bearer\s+)[A-Za-z0-9._~+/=-]+/g;
+export function redact(text: string): string;
+export function redact(text: string | undefined): string | undefined;
+export function redact(text: string | undefined): string | undefined {
+  return text?.replace(SECRET_PARAM, "$1[redacted]").replace(BEARER, "$1[redacted]");
 }
 
 export function num(v: unknown): number | undefined {

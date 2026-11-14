@@ -6,6 +6,7 @@ import { COLLECTORS } from "./collectors/index.ts";
 import { logRun, writeResult } from "./store.ts";
 import type { ChannelId, CollectResult } from "./types.ts";
 import { emptyResult } from "./types.ts";
+import { redact } from "./http.ts";
 
 const MAX_POSTS = 25;
 
@@ -52,7 +53,7 @@ Deno.serve(async (req) => {
       }
     }
     await logRun(db, channel, startedAt, result.status, rows, result.message);
-    return { channel, status: result.status, rows, message: result.message };
+    return { channel, status: result.status, rows, message: redact(result.message) };
   }));
 
   return Response.json({ captured_at: capturedAt, channels: summary });

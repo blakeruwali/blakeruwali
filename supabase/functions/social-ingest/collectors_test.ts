@@ -81,3 +81,18 @@ Deno.test("manual Day 1 rows are matched to the API post with the closest lower 
   assertEquals(pickManualMatch([reel, longform], 100), undefined);
   assertEquals(pickManualMatch([{ id: "a", views: 5 }, { id: "b", views: 5 }], 9), undefined);
 });
+
+Deno.test("redact strips tokens from error text", async () => {
+  const { redact } = await import("./http.ts");
+  assertEquals(redact("GET https://g.com/me?fields=a&access_token=EAAB123 failed"), "GET https://g.com/me?fields=a&access_token=[redacted] failed");
+  assertEquals(redact("x?key=AIzaXYZ&id=1"), "x?key=[redacted]&id=1");
+  assertEquals(redact("Authorization: Bearer abc.def-123"), "Authorization: Bearer [redacted]");
+});
+
+Deno.test("network errors from fetch are redacted", async () => {
+  const { getJson } = await import("./http.ts");
+  const boom = () => Promise.reject(new Error("error sending request for url (https://graph.instagram.com/me?access_token=SECRET123)"));
+  let msg = "";
+  try { await getJson(boom as never, "https://graph.instagram.com/me?access_token=SECRET123"); } catch (e) { msg = (e as Error).message; }
+  assertEquals(msg.includes("SECRET123"), false);
+});
