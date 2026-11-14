@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Everything I promised in my videos | Blake Ruwali</title>
+<meta name="description" content="The prompts and AI tools from Blake Ruwali's daily videos, newest first. Copy, paste, use.">
+<link rel="canonical" href="https://www.blakeruwali.com/ai/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Everything I promised in my videos">
+<meta property="og:description" content="One AI tool or prompt a day, newest first. Copy, paste, use.">
+<meta property="og:url" content="https://www.blakeruwali.com/ai/">
+<meta property="og:image" content="https://www.blakeruwali.com/assets/blake-ruwali.jpg">
+<meta name="author" content="Blake Ruwali">
+<meta name="theme-color" content="#090E25">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #090E25; --band: #0D1433; --card: #131B40; --line: #1F2852; --line2: #2C3868;
+    --text: #FFFFFF; --soft: #C3C8DA; --muted: #8A91AD; --accent: #FF7E2E;
+    --grad: linear-gradient(100deg, #C24A00, #9D1B78); --yellow: #FACC15;
+    --font: "Avenir Next", Avenir, Montserrat, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --display: "Archivo Black", "Arial Black", var(--font);
+  }
+  * { box-sizing: border-box; }
+  html { overflow-x: clip; }
+  body { margin: 0; background: var(--bg); color: var(--soft); font: 500 16px/1.55 var(--font); -webkit-font-smoothing: antialiased; }
+  a { color: var(--accent); }
+  p, ol, ul, h1, h2, h3 { margin: 0; }
+  .wrap { position: relative; max-width: 860px; margin: 0 auto; padding: 28px 24px 64px; }
+  .wrap::before { content: ""; position: absolute; inset: -40px 10% auto; height: 340px; z-index: -1; pointer-events: none;
+    background: radial-gradient(closest-side, rgba(194, 74, 0, .35), transparent), radial-gradient(closest-side at 70% 40%, rgba(157, 27, 120, .4), transparent); filter: blur(30px); }
+  @media (max-width: 480px) { .wrap { padding: 20px 16px 48px; } }
+
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 40px; }
+  .brand { color: var(--text); text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: .4px; font-size: 18px; white-space: nowrap; }
+  .brand::after { content: ""; display: inline-block; width: 7px; height: 7px; margin-left: 5px; border-radius: 2px; background: var(--grad); }
+  .top .follow { color: var(--text); text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; }
+  .top .follow:hover { color: var(--accent); }
+
+  .head { display: grid; gap: 14px; justify-items: start; margin-bottom: 36px; }
+  .pill { background: var(--grad); color: #FFF; font-weight: 700; text-transform: uppercase; font-size: 13px; line-height: 1; padding: 8px 11px 7px; border-radius: 8px; }
+  h1 { font-family: var(--display); font-weight: 400; color: var(--text); text-transform: uppercase; font-size: clamp(36px, 7vw, 64px); line-height: .98; letter-spacing: -.3px; }
+  .sub { font-size: 18px; max-width: 56ch; }
+
+  .days { display: grid; gap: 22px; }
+  .day { background: var(--card); border-radius: 18px; padding: 24px 24px 22px; box-shadow: inset 0 0 0 1px var(--line); }
+  .day.new { border: 2px solid transparent; box-shadow: 0 20px 60px -30px rgba(157, 27, 120, .7);
+    background: linear-gradient(var(--card), var(--card)) padding-box, var(--grad) border-box; }
+  @media (max-width: 480px) { .day { padding: 20px 16px 18px; border-radius: 14px; } }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 10px; }
+  .daynum { font-family: var(--display); color: var(--yellow); font-size: 15px; letter-spacing: .5px; text-transform: uppercase; }
+  .date { color: var(--muted); font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+  .tag { font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: #FFF; background: var(--grad); padding: 4px 7px 3px; border-radius: 6px; }
+  h2 { font-family: var(--display); font-weight: 400; color: var(--text); text-transform: uppercase; font-size: clamp(22px, 3.6vw, 30px); line-height: 1.08; margin-bottom: 8px; }
+  .lede { font-size: 16.5px; margin-bottom: 18px; }
+  h3 { color: var(--text); font-size: 13px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; margin: 20px 0 10px; }
+
+  .prompt { position: relative; background: var(--band); border-radius: 12px; box-shadow: inset 0 0 0 1px var(--line2); }
+  .prompt-bar { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 10px 10px 14px; border-bottom: 1px solid var(--line); }
+  .prompt-bar span { color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+  .copy { font: inherit; font-size: 13px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; color: #FFF; background: var(--grad); border: 0; border-radius: 9px; padding: 10px 16px; cursor: pointer; min-width: 92px; transition: transform .15s ease, filter .15s ease; }
+  .copy:hover { filter: brightness(1.12); }
+  .copy:active { transform: scale(.97); }
+  .copy:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
+  .prompt pre { margin: 0; padding: 14px 16px 16px; white-space: pre-wrap; word-wrap: break-word; color: var(--text); font: 500 15.5px/1.6 var(--font); }
+  .works { margin-top: 10px; font-size: 14px; color: var(--muted); }
+  .works b { color: var(--soft); }
+
+  .steps { list-style: none; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(3, 1fr); counter-reset: s; }
+  @media (max-width: 680px) { .steps { grid-template-columns: 1fr; } }
+  .steps li { counter-increment: s; background: var(--band); border-radius: 12px; padding: 14px 14px 13px; box-shadow: inset 0 0 0 1px var(--line); }
+  .steps li::before { content: "0" counter(s); display: block; font-family: var(--display); font-size: 13px; color: var(--accent); margin-bottom: 4px; }
+  .steps b { display: block; color: var(--text); text-transform: uppercase; font-size: 15px; letter-spacing: .4px; margin-bottom: 4px; }
+  .steps p { font-size: 14.5px; }
+  .where { list-style: none; padding: 0; display: grid; gap: 6px; font-size: 15px; }
+  .where li b { color: var(--text); }
+
+  .draft { margin-top: 4px; padding: 12px 14px; border-radius: 10px; border: 2px dashed var(--yellow); color: var(--yellow); font-size: 13px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; }
+  .tools { list-style: none; padding: 0; display: grid; gap: 8px; margin-top: 12px; }
+  .tools li { padding: 12px 14px; border-radius: 10px; border: 1px dashed var(--line2); color: var(--muted); font-size: 15px; }
+
+  .foot { margin-top: 36px; display: grid; gap: 14px; justify-items: start; padding: 22px; border-radius: 16px; border: 2px solid transparent;
+    background: linear-gradient(var(--band), var(--band)) padding-box, var(--grad) border-box; }
+  .foot strong { font-family: var(--display); font-weight: 400; color: var(--text); text-transform: uppercase; font-size: clamp(20px, 3.4vw, 26px); line-height: 1.1; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; }
+  .links a { display: inline-block; color: var(--text); text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: .6px; padding: 9px 13px; border-radius: 9px; box-shadow: inset 0 0 0 1px var(--line2); transition: background .15s ease, box-shadow .15s ease; }
+  .links a:hover, .links a:focus-visible { background: rgba(255, 126, 46, .12); box-shadow: inset 0 0 0 1px var(--accent); }
+  .small { margin-top: 14px; font-size: 13px; color: var(--muted); }
+  .small a { color: var(--soft); }
+  @media (prefers-reduced-motion: reduce) { .copy { transition: none; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="top">
+    <a class="brand" href="/">Blake Ruwali</a>
+    <a class="follow" href="#follow">Follow →</a>
+  </header>
+
+  <section class="head" aria-labelledby="t">
+    <p class="pill">AI, one day at a time</p>
+    <h1 id="t">Everything I promised in my videos</h1>
+    <p class="sub">Every prompt and tool from my daily videos lives here, newest first. Copy it, paste it, use it.</p>
+  </section>
+
+  <div class="days">
+    <article class="day new" id="day-2" aria-labelledby="d2">
+      <div class="meta"><span class="daynum">Day 2</span><span class="date">Nov 15, 2026</span><span class="tag">Newest</span></div>
+      <h2 id="d2">How old is your AC, furnace or water heater? One photo tells you.</h2>
+      <p class="lede">Every unit has a data plate with its model and serial number. AI can read it and tell you what you've got.</p>
+
+      <div class="prompt">
+        <div class="prompt-bar"><span>Copy-paste prompt</span><button class="copy" type="button" data-copy="p2" aria-live="polite">Copy</button></div>
+        <pre id="p2">Here's a photo of the data plate on my [AC / furnace / water heater]. Read the brand, model and serial number. Tell me: 1) when it was made and how old it is, 2) what refrigerant or fuel it uses, 3) what I should ask before paying for a repair. If you can't read something, say so. Don't guess.</pre>
+      </div>
+      <p class="works">Works in <b>ChatGPT</b>, <b>Claude</b> or <b>Gemini</b>.</p>
+
+      <h3>How to do it</h3>
+      <ol class="steps">
+        <li><b>Find the sticker</b><p>The metal or paper label with the model and serial number. See where below.</p></li>
+        <li><b>Snap it</b><p>Take a clear, close photo. Make sure the numbers are sharp.</p></li>
+        <li><b>Paste it</b><p>Upload the photo to your AI app, paste the prompt and send.</p></li>
+      </ol>
+
+      <h3>Where the sticker is</h3>
+      <ul class="where">
+        <li><b>AC:</b> on the side panel of the outdoor unit.</li>
+        <li><b>Furnace:</b> inside the front door.</li>
+        <li><b>Water heater:</b> on the tank, near the bottom.</li>
+      </ul>
+    </article>
+
+    <article class="day" id="day-1" aria-labelledby="d1">
+      <div class="meta"><span class="daynum">Day 1</span><span class="date">Nov 14, 2026</span></div>
+      <h2 id="d1">The AI tools I use to run my company</h2>
+      <!-- PLACEHOLDER: Blake to fill in the real tools before this card goes live. Do not invent tools. -->
+      <p class="draft">Placeholder · Blake to fill in the list</p>
+      <ul class="tools">
+        <li>[Tool name]: [what I use it for]</li>
+        <li>[Tool name]: [what I use it for]</li>
+        <li>[Tool name]: [what I use it for]</li>
+      </ul>
+    </article>
+  </div>
+
+  <footer class="foot" id="follow">
+    <strong>New tool every day. Follow @blakeruwali</strong>
+    <ul class="links">
+      <li><a href="https://www.instagram.com/blakeruwali/">Instagram</a></li>
+      <li><a href="https://www.tiktok.com/@blakeruwali">TikTok</a></li>
+      <li><a href="https://www.youtube.com/@blakeruwali">YouTube</a></li>
+      <li><a href="https://x.com/blakeruwali">X</a></li>
+      <li><a href="https://www.linkedin.com/in/blakeruwali">LinkedIn</a></li>
+      <li><a href="https://www.threads.com/@blakeruwali">Threads</a></li>
+    </ul>
+  </footer>
+  <p class="small">AI can misread a label. Check what it tells you against the plate itself. <a href="/">More about me</a></p>
+</main>
+<script>
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = document.getElementById(btn.dataset.copy).textContent;
+      var done = function (ok) {
+        btn.textContent = ok ? 'Copied' : 'Select & copy';
+        setTimeout(function () { btn.textContent = 'Copy'; }, 2000);
+      };
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(fallback(text)); });
+      } else { done(fallback(text)); }
+    });
+  });
+  function fallback(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+</script>
+</body>
+</html>
