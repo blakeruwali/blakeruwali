@@ -146,6 +146,7 @@ def main():
             lines.append(f'    <xhtml:link rel="alternate" hreflang="{tag2}" href="{url_for(p2)}"/>')
         lines.append(f'    <xhtml:link rel="alternate" hreflang="x-default" href="{url_for("")}"/>')
         lines.append("  </url>")
+    guide_urls = guide_urls + [f"{SITE}/missed-call-fix/"]
     for u in guide_urls:
         lines.append(f"  <url><loc>{u}</loc></url>")
     lines.append("</urlset>")

@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The 7pm Missed-Call Fix: a one-page checklist for HVAC and plumbing shops | Blake Ruwali</title>
+<meta name="description" content="A one-page checklist to set up AI to answer the calls your HVAC or plumbing office can't pick up: measure the leak, set limits, connect it, test it, go live narrow, review weekly.">
+<link rel="canonical" href="https://www.blakeruwali.com/missed-call-fix/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The 7pm Missed-Call Fix">
+<meta property="og:description" content="A one-page checklist for HVAC and plumbing shops: set up AI to answer the calls you miss, with a person checking.">
+<meta property="og:url" content="https://www.blakeruwali.com/missed-call-fix/">
+<meta property="og:image" content="https://www.blakeruwali.com/assets/blake-ruwali.jpg">
+<meta name="author" content="Blake Ruwali">
+<meta name="theme-color" content="#080A0E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "The 7pm Missed-Call Fix: set up AI to answer the calls your HVAC or plumbing office misses",
+  "url": "https://www.blakeruwali.com/missed-call-fix/",
+  "author": {"@id": "https://www.blakeruwali.com/#person", "@type": "Person", "name": "Blake Ruwali"},
+  "datePublished": "2026-11-14",
+  "step": [
+    {"@type": "HowToStep", "name": "Measure the leak", "text": "Pull last week's call log and count unanswered calls by hour, how long callbacks took, and how many never got one."},
+    {"@type": "HowToStep", "name": "Set the rules", "text": "Write down what the AI may do, may not do, and must hand to a person."},
+    {"@type": "HowToStep", "name": "Write the script", "text": "A greeting under ten seconds that says it is an automated assistant, then a short list of intake questions."},
+    {"@type": "HowToStep", "name": "Connect it", "text": "Every call becomes a lead in your job system, with an alert to the person on call."},
+    {"@type": "HowToStep", "name": "Test with bad calls", "text": "Make 20 deliberately difficult test calls and fix every fumble."},
+    {"@type": "HowToStep", "name": "Go live narrow", "text": "After-hours and overflow only, with a person reviewing every recording each morning for two weeks."},
+    {"@type": "HowToStep", "name": "Review weekly", "text": "Listen to recordings, check every lead got a callback, and update the script."}
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg: #080A0E; --band: #0E131A; --card: #141A22; --line: #1F2833; --line2: #2A3542;
+    --text: #FFFFFF; --soft: #BEC8D2; --muted: #828C96; --cyan: #00E5FF; --cyan-soft: rgba(0,229,255,.14);
+    --font: "Avenir Next", Avenir, Montserrat, system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--soft); font: 500 16px/1.55 var(--font); -webkit-font-smoothing: antialiased; }
+  a { color: var(--cyan); }
+  p, ul, h1, h2 { margin: 0; }
+  .sheet { max-width: 1040px; margin: 0 auto; padding: 32px 24px 56px; }
+  @media (max-width: 480px) { .sheet { padding: 22px 16px 40px; } }
+
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 26px; }
+  .brand { color: var(--text); text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: .4px; font-size: 18px; white-space: nowrap; }
+  .brand::after { content: ""; display: inline-block; width: 7px; height: 7px; margin-left: 5px; border-radius: 2px; background: var(--cyan); }
+  .top .print { font: inherit; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text); background: transparent; border: 0; box-shadow: inset 0 0 0 2px var(--cyan); border-radius: 9px; padding: 9px 12px; cursor: pointer; }
+  .top .print:hover { background: var(--cyan-soft); }
+
+  .head { display: grid; gap: 10px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+  .pill { justify-self: start; background: var(--cyan); color: var(--bg); font-weight: 700; text-transform: uppercase; font-size: 13px; line-height: 1; padding: 8px 11px 7px; border-radius: 8px; }
+  h1 { color: var(--text); font-weight: 900; text-transform: uppercase; font-size: clamp(34px, 6vw, 56px); line-height: .98; letter-spacing: -.3px; }
+  .sub { font-size: 17px; max-width: 70ch; }
+
+  .grid { display: grid; gap: 14px; margin-top: 18px; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); }
+  .step { background: var(--card); border-radius: 14px; padding: 16px 18px 14px; box-shadow: inset 0 0 0 1px var(--line); }
+  .step h2 { display: flex; align-items: baseline; gap: 10px; color: var(--text); font-weight: 800; text-transform: uppercase; font-size: 18px; line-height: 1.15; margin-bottom: 8px; }
+  .step h2 span { color: var(--cyan); font-size: 14px; letter-spacing: 1px; }
+  .step .when { color: var(--cyan); font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; margin: -4px 0 6px; }
+  .checks { list-style: none; padding: 0; display: grid; gap: 5px; font-size: 15px; }
+  .checks li { position: relative; padding-left: 26px; }
+  .checks li::before { content: ""; position: absolute; left: 0; top: 4px; width: 14px; height: 14px; border-radius: 4px; box-shadow: inset 0 0 0 2px var(--cyan); }
+  .checks b { color: var(--text); }
+  .rules { display: grid; gap: 6px; font-size: 15px; }
+  .rules p b { display: inline-block; min-width: 62px; color: var(--bg); background: var(--cyan); border-radius: 5px; padding: 1px 6px; font-size: 11px; letter-spacing: .8px; text-transform: uppercase; margin-right: 6px; vertical-align: 1px; text-align: center; }
+  .rules p.no b { background: var(--text); }
+  .rules p.hand b { background: transparent; color: var(--cyan); box-shadow: inset 0 0 0 1.5px var(--cyan); }
+  .script { margin-top: 2px; padding: 10px 12px; border-left: 3px solid var(--cyan); background: var(--band); border-radius: 0 8px 8px 0; color: var(--text); font-size: 14.5px; }
+  .wide { grid-column: 1 / -1; }
+
+  .foot { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 14px 24px; justify-content: space-between; align-items: center; padding: 16px 18px; border-radius: 14px; box-shadow: inset 0 0 0 2px var(--cyan); background: var(--band); }
+  .foot p { font-size: 14.5px; }
+  .foot strong { color: var(--text); }
+  .foot .links { display: flex; flex-wrap: wrap; gap: 8px 18px; font-weight: 700; font-size: 14px; }
+  .note { margin-top: 12px; font-size: 12.5px; color: var(--muted); }
+
+  /* One letter-size page when printed or saved as PDF */
+  @page { size: letter; margin: 0; }
+  @media print {
+    html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { font-size: 10.5px; }
+    .sheet { max-width: none; width: 8.5in; height: 11in; padding: .38in .42in; overflow: hidden; }
+    .top { margin-bottom: 12px; }
+    .top .print { display: none; }
+    .brand { font-size: 13px; }
+    .head { gap: 6px; padding-bottom: 10px; }
+    .pill { font-size: 9px; padding: 5px 7px 4px; }
+    h1 { font-size: 40px; }
+    .sub { font-size: 12.5px; }
+    .grid { grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+    .step { padding: 11px 13px 10px; border-radius: 9px; break-inside: avoid; }
+    .step h2 { font-size: 14px; margin-bottom: 6px; gap: 6px; }
+    .step h2 span { font-size: 10px; }
+    .step .when { font-size: 8.5px; margin: -2px 0 3px; }
+    .checks, .rules { font-size: 11.2px; gap: 4px; }
+    .checks li { padding-left: 17px; }
+    .checks li::before { width: 10px; height: 10px; top: 2px; border-radius: 3px; }
+    .rules p b { min-width: 46px; font-size: 8px; padding: 0 4px; }
+    .script { font-size: 11px; padding: 7px 9px; }
+    .foot { margin-top: 12px; padding: 11px 13px; border-radius: 9px; gap: 6px 14px; }
+    .foot p, .foot .links { font-size: 11px; }
+    .note { margin-top: 8px; font-size: 9px; }
+  }
+</style>
+</head>
+<body>
+<main class="sheet">
+  <header class="top">
+    <a class="brand" href="/">Blake Ruwali</a>
+    <button class="print" type="button" onclick="window.print()">Save as PDF</button>
+  </header>
+
+  <section class="head" aria-labelledby="t">
+    <p class="pill">AI for the trades · Checklist</p>
+    <h1 id="t">The 7pm missed&#8209;call fix</h1>
+    <p class="sub">Your next job calls at 7pm. Nobody answers, so they call the next company. This is the order I'd set up an AI phone agent for the calls your office can't pick up, with a person checking. Tick each box before moving on.</p>
+  </section>
+
+  <div class="grid">
+    <section class="step">
+      <h2><span>01</span>Measure the leak</h2>
+      <p class="when">This week · 30 minutes</p>
+      <ul class="checks">
+        <li>Pull <b>last week's call log</b> from your phone system.</li>
+        <li>Count <b>unanswered calls by hour</b>. Circle after 5pm, weekends and lunch.</li>
+        <li>For each one: <b>did anyone call back, and how fast?</b></li>
+        <li>Mark the ones that never got a callback. That's your real number.</li>
+      </ul>
+    </section>
+
+    <section class="step">
+      <h2><span>02</span>Set the rules in writing</h2>
+      <div class="rules">
+        <p><b>May</b>Greet, ask what's wrong, take name, address and callback number, ask a few triage questions, text a confirmation.</p>
+        <p class="no"><b>Never</b>Diagnose, quote prices, promise arrival times it can't see, talk warranty or rebates.</p>
+        <p class="hand"><b>Hand off</b>Gas smell, CO alarm, smoke, flooding, an angry caller, anyone who asks for a person.</p>
+      </div>
+    </section>
+
+    <section class="step">
+      <h2><span>03</span>Write the script</h2>
+      <ul class="checks">
+        <li>Greeting <b>under 10 seconds</b>. Say it's an automated assistant.</li>
+        <li>Intake questions: <b>name, callback number, address, what's happening, is anyone without heat or water.</b></li>
+        <li>Safety calls: <b>your own words</b> for what the caller should do now, then alert a person.</li>
+        <li>Close by reading back the number and what happens next.</li>
+      </ul>
+      <p class="script">"Thanks for calling [Company]. I'm the automated assistant and I can get your request to our team right now. What's going on?"</p>
+    </section>
+
+    <section class="step">
+      <h2><span>04</span>Connect it to where jobs live</h2>
+      <ul class="checks">
+        <li>Every call creates a <b>lead or job in your field service software</b> with the transcript.</li>
+        <li>The <b>person on call gets a text and an email</b> for every lead.</li>
+        <li>Can it read your real schedule? Then offer real slots. <b>If not, it promises a callback, never a time.</b></li>
+        <li>The caller gets a <b>confirmation text</b> about their own request.</li>
+      </ul>
+    </section>
+
+    <section class="step">
+      <h2><span>05</span>Test it with 20 bad calls</h2>
+      <ul class="checks">
+        <li>Mumbled address · talking over it · wrong number · spam.</li>
+        <li>Existing customer asking about a job already booked.</li>
+        <li>An emergency call: <b>did a person get alerted?</b></li>
+        <li>Write down every fumble, fix the script, call again.</li>
+      </ul>
+    </section>
+
+    <section class="step">
+      <h2><span>06</span>Go live narrow</h2>
+      <ul class="checks">
+        <li>Turn it on for <b>after-hours and overflow only</b>.</li>
+        <li>For 2 weeks, a person <b>reviews every recording each morning</b>.</li>
+        <li>Only then add busy-line and lunch-hour overflow.</li>
+        <li>Never route every call through it on day one.</li>
+      </ul>
+    </section>
+
+    <section class="step wide">
+      <h2><span>07</span>Review it every week</h2>
+      <ul class="checks">
+        <li>Listen to <b>10 recordings</b>. Fix one line of the script.</li>
+        <li>Check that <b>every lead got a callback</b> from a person, and how fast.</li>
+        <li>Re-count missed calls against your week-one number. <b>Count, don't guess.</b></li>
+      </ul>
+    </section>
+  </div>
+
+  <footer class="foot">
+    <p><strong>Blake Ruwali</strong> · I run Home+ Air &amp; Heat on Long Island and build the AI behind it.</p>
+    <p class="links">
+      <a href="https://www.blakeruwali.com/missed-calls-ai/">Full guide: blakeruwali.com/missed-calls-ai</a>
+      <a href="https://www.techeo.com/contact">Want help? Book a 20-min AI shop audit</a>
+    </p>
+  </footer>
+  <p class="note">Check your state's rules on call recording and on texting customers before you go live. Only text callers about the request they made.</p>
+</main>
+</body>
+</html>
