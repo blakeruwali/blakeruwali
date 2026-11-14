@@ -17,7 +17,7 @@
       "givenName": "Blake",
       "familyName": "Ruwali",
       "url": "https://www.blakeruwali.com/",
-      "description": "American entrepreneur based in New York. Founder of Techeo, Home+ Air & Heat, Com+ Mechanical and Long Island HVAC Repair, and owner of Takeo.AI, where Blake was President and CEO from 2019 to 2025.",
+      "description": "American entrepreneur based in New York who builds AI for the trades. Founder of Home+ Air & Heat, Techeo, Com+ Mechanical and Long Island HVAC Repair, and owner of Takeo.AI, where Blake was President and CEO from 2019 to 2025.",
       "jobTitle": "Entrepreneur",
       "image": "https://www.blakeruwali.com/assets/blake-ruwali.jpg",
       "homeLocation": {
@@ -60,10 +60,11 @@
         "@id": "https://www.blakeruwali.com/#takeo"
       },
       "knowsAbout": [
+        "AI for the trades",
         "Artificial intelligence",
+        "HVAC services",
         "HVAC marketing",
         "Answer engine optimization",
-        "HVAC services",
         "Technology education"
       ],
       "worksFor": [
@@ -83,6 +84,9 @@
       "sameAs": [
         "https://www.linkedin.com/in/blakeruwali",
         "https://www.instagram.com/blakeruwali/",
+        "https://www.facebook.com/bikigram",
+        "https://www.tiktok.com/@blakeruwali",
+        "https://www.youtube.com/@blakeruwali",
         "https://www.crunchbase.com/person/blake-ruwali",
         "https://theorg.com/org/techeo/person/blake-ruwali",
         "https://hometsair.com/people/blake-ruwali",
@@ -109,8 +113,7 @@
       "@id": "https://www.blakeruwali.com/#techeo",
       "name": "Techeo",
       "url": "https://www.techeo.com/",
-      "description": "Growth partner for HVAC and plumbing companies: AI search, marketing, call answering and follow-up systems, first built inside Home+ Air & Heat.",
-      "foundingDate": "2019-06",
+      "description": "AI and marketing for HVAC and plumbing companies: call answering, follow-up, estimates and AI search, first built and tested inside Home+ Air & Heat.",
       "founder": {
         "@id": "https://www.blakeruwali.com/#person"
       },

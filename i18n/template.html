@@ -16,10 +16,10 @@
 <meta property="profile:last_name" content="Ruwali">
 <meta property="og:image" content="https://www.blakeruwali.com/assets/blake-ruwali.jpg">
 <meta name="twitter:card" content="summary">
-<meta name="theme-color" content="#101111">
+<meta name="theme-color" content="#080A0E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {{jsonld}}
 </script>
@@ -34,6 +34,7 @@
     <a href="#story">{{nav_story}}</a>
     <a href="#ventures">{{nav_companies}}</a>
     <a href="#press">{{nav_press}}</a>
+        <a href="#follow">{{nav_follow}}</a>
     <a class="strong" href="#techeo">Techeo {{arrow}}</a>
   </nav>
   <div class="tools">
@@ -50,6 +51,7 @@
         <a href="#story">{{nav_story}}</a>
         <a href="#ventures">{{nav_companies}}</a>
         <a href="#press">{{nav_press}}</a>
+        <a href="#follow">{{nav_follow}}</a>
         <a class="strong" href="#techeo">Techeo {{arrow}}</a>
       </nav>
     </details>
@@ -59,6 +61,7 @@
 <main id="main">
   <section id="top" class="wrap hero">
     <div class="hero-text">
+      <p class="pill">{{hero_pill}}</p>
       <h1 class="serif">{{hero_h1}}</h1>
       <p class="lede">{{hero_lede}}</p>
       <div class="ctas">
@@ -166,6 +169,66 @@
       <a class="go" href="https://www.linkedin.com/in/blakeruwali">{{press2_go}} {{arrow}}</a>
     </div>
   </section>
+
+  <section id="content" class="wrap content" aria-labelledby="content-h">
+    <div class="content-head">
+      <div>
+        <p class="eyebrow">{{content_eyebrow}}</p>
+        <h2 id="content-h">{{content_h2}}</h2>
+      </div>
+      <p class="sub">{{content_p}}</p>
+    </div>
+    <div class="media-row">
+      <a class="media" href="https://www.instagram.com/blakeruwali/">
+        <img src="/assets/img/carousel-1.webp" alt="{{c1_alt}}" width="540" height="675" loading="lazy" decoding="async">
+        <span class="media-cap"><span class="kind">{{c1_kind}}</span><span class="mt">{{c1_title}}</span></span>
+      </a>
+      <a class="media" href="https://www.instagram.com/blakeruwali/">
+        <img src="/assets/img/carousel-4.webp" alt="{{c2_alt}}" width="540" height="675" loading="lazy" decoding="async">
+        <span class="media-cap"><span class="kind">{{c2_kind}}</span><span class="mt">{{c2_title}}</span></span>
+      </a>
+      <a class="media" href="https://www.youtube.com/watch?v=J69FjQbMue4">
+        <span class="video-frame" aria-hidden="true"><span class="play"></span></span>
+        <span class="media-cap"><span class="kind">{{c3_kind}}</span><span class="mt">{{c3_title}}</span><span class="go">{{watch}} {{arrow}}</span></span>
+      </a>
+    </div>
+    <div class="series">
+      <p class="eyebrow">{{series_label}}</p>
+      <ul>
+        <li>{{s1}}</li>
+        <li>{{s2}}</li>
+        <li>{{s3}}</li>
+        <li>{{s4}}</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="follow" class="follow" aria-labelledby="follow-h">
+    <div class="wrap">
+      <p class="eyebrow">{{follow_eyebrow}}</p>
+      <h2 id="follow-h">{{follow_h2}}</h2>
+      <ul class="socials">
+        <li><a class="social" href="https://www.facebook.com/bikigram" rel="me"><span class="net">Facebook</span><span class="handle">/bikigram</span><span class="what">{{f_fb}}</span><span class="go" aria-hidden="true">{{arrow}}</span></a></li>
+        <li><a class="social" href="https://www.instagram.com/blakeruwali/" rel="me"><span class="net">Instagram</span><span class="handle">@blakeruwali</span><span class="what">{{f_ig}}</span><span class="go" aria-hidden="true">{{arrow}}</span></a></li>
+        <li><a class="social" href="https://www.tiktok.com/@blakeruwali" rel="me"><span class="net">TikTok</span><span class="handle">@blakeruwali</span><span class="what">{{f_tt}}</span><span class="go" aria-hidden="true">{{arrow}}</span></a></li>
+        <li><a class="social" href="https://www.youtube.com/@blakeruwali" rel="me"><span class="net">YouTube</span><span class="handle">@blakeruwali</span><span class="what">{{f_yt}}</span><span class="go" aria-hidden="true">{{arrow}}</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="guide" class="wrap guide" aria-labelledby="guide-h">
+    <div class="guide-card">
+      <p class="pill">{{guide_pill}}</p>
+      <p class="eyebrow">{{guide_eyebrow}}</p>
+      <h2 id="guide-h">{{guide_h2}}</h2>
+      <p class="body">{{guide_p}}</p>
+      <div class="ctas">
+        <a class="btn" href="https://ig.me/m/blakeruwali">{{guide_cta1}} {{arrow}}</a>
+        <a class="btn btn-ghost" href="https://www.techeo.com/contact">{{guide_cta2}}</a>
+      </div>
+      <p class="note">{{guide_note}}</p>
+    </div>
+  </section>
 </main>
 
 <footer class="foot">
@@ -173,10 +236,12 @@
     <p>© 2026 Blake Ruwali · {{foot_city}}</p>
     <nav aria-label="{{foot_label}}">
       <a href="https://www.linkedin.com/in/blakeruwali" rel="me">LinkedIn</a>
+      <a href="https://www.facebook.com/bikigram" rel="me">Facebook</a>
       <a href="https://www.instagram.com/blakeruwali/" rel="me">Instagram</a>
+      <a href="https://www.tiktok.com/@blakeruwali" rel="me">TikTok</a>
+      <a href="https://www.youtube.com/@blakeruwali" rel="me">YouTube</a>
       <a href="https://www.crunchbase.com/person/blake-ruwali" rel="me">Crunchbase</a>
       <a href="https://theorg.com/org/techeo/person/blake-ruwali" rel="me">The Org</a>
-      <a href="https://www.youtube.com/watch?v=J69FjQbMue4">YouTube</a>
       <a href="https://github.com/blakeruwali" rel="me">GitHub</a>
       <a href="https://hometsair.com/people/blake-ruwali" rel="me">{{foot_home}}</a>
     </nav>
