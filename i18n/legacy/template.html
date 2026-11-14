@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="{{lang}}" dir="{{dir}}"{{html_class}}>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title}}</title>
+<meta name="description" content="{{meta_desc}}">
+<link rel="canonical" href="{{url}}">
+{{hreflang}}
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Blake Ruwali">
+<meta property="og:description" content="{{og_desc}}">
+<meta property="og:url" content="{{url}}">
+<meta property="og:locale" content="{{og_locale}}">
+<meta property="profile:first_name" content="Blake">
+<meta property="profile:last_name" content="Ruwali">
+<meta property="og:image" content="https://www.blakeruwali.com/assets/blake-ruwali.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#101111">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{{jsonld}}
+</script>
+{{style}}
+</head>
+<body>
+<a class="skip" href="#main">{{skip}}</a>
+<header class="wrap top">
+  <a class="brand" href="#top">Blake Ruwali</a>
+  <nav class="nav" aria-label="{{nav_label}}">
+    <a href="#build">{{nav_build}}</a>
+    <a href="#story">{{nav_story}}</a>
+    <a href="#ventures">{{nav_companies}}</a>
+    <a href="#press">{{nav_press}}</a>
+    <a class="strong" href="#techeo">Techeo {{arrow}}</a>
+  </nav>
+  <div class="tools">
+    <details class="langs">
+      <summary aria-label="{{lang_label}}"><span aria-hidden="true">🌐</span> <span class="lname">{{native}}</span><span class="lcode" aria-hidden="true">{{code_upper}}</span></summary>
+      <ul>
+{{switcher}}
+      </ul>
+    </details>
+    <details class="menu">
+      <summary>{{menu}}</summary>
+      <nav class="nav" aria-label="{{nav_label_small}}">
+        <a href="#build">{{nav_build}}</a>
+        <a href="#story">{{nav_story}}</a>
+        <a href="#ventures">{{nav_companies}}</a>
+        <a href="#press">{{nav_press}}</a>
+        <a class="strong" href="#techeo">Techeo {{arrow}}</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<main id="main">
+  <section id="top" class="wrap hero">
+    <div class="hero-text">
+      <h1 class="serif">{{hero_h1}}</h1>
+      <p class="lede">{{hero_lede}}</p>
+      <div class="ctas">
+        <a class="btn" href="#build">{{cta_build}}</a>
+        <a class="link" href="#story">{{cta_story}}</a>
+      </div>
+    </div>
+    <figure class="portrait">
+      <div class="frame"><img src="/assets/blake-ruwali.jpg" alt="Blake Ruwali" width="720" height="720" fetchpriority="high"></div>
+      <figcaption>{{portrait_caption}}</figcaption>
+    </figure>
+  </section>
+
+  <section class="stats" aria-label="{{stats_label}}">
+    <div class="wrap">
+      <div class="stat"><p class="num">5.0</p><p class="label">{{stat1}}</p></div>
+      <div class="stat"><p class="num">5</p><p class="label">{{stat2}}</p></div>
+      <div class="stat"><p class="num">7</p><p class="label">{{stat3}}</p></div>
+      <div class="stat"><p class="num">{{stat4_num}}</p><p class="label">{{stat4}}</p></div>
+    </div>
+  </section>
+
+  <section id="build" class="build" aria-labelledby="build-h">
+    <div class="wrap">
+      <div class="intro">
+        <p class="eyebrow">{{build_eyebrow}}</p>
+        <h2 id="build-h" class="serif">{{build_h2}}</h2>
+        <p>{{build_p}}</p>
+      </div>
+      <div class="shots">
+        <figure class="shot">
+          <div class="frame" style="background:#B4AA9C"><img src="/assets/scan3d.jpg" alt="{{shot1_alt}}" width="1000" height="712" loading="lazy"></div>
+          <figcaption><b>{{shot1_title}}</b><span>{{shot1_text}}</span></figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="frame"><img class="contain" src="/assets/floorplan.jpg" alt="{{shot2_alt}}" width="1000" height="820" loading="lazy"></div>
+          <figcaption><b>{{shot2_title}}</b><span>{{shot2_text}}</span></figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="frame"><img src="/assets/loads.jpg" alt="{{shot3_alt}}" width="1000" height="673" loading="lazy"></div>
+          <figcaption><b>{{shot3_title}}</b><span>{{shot3_text}}</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="story" class="wrap story" aria-labelledby="story-h">
+    <div class="story-text">
+      <p id="story-h" class="eyebrow">{{story_eyebrow}}</p>
+      <blockquote>{{story_quote}}</blockquote>
+      <p class="body">{{story_body}}</p>
+      <p class="fact">{{story_fact_html}}</p>
+    </div>
+    <ol class="timeline" aria-label="{{timeline_label}}">
+      <li><p class="when cold">{{tl1_when}}</p><p class="what">{{tl1_what}}</p><p class="note">{{tl1_note}}</p></li>
+      <li><p class="when cold">{{tl2_when}}</p><p class="what">{{tl2_what}}</p><p class="note">{{tl2_note}}</p></li>
+      <li><p class="when">2019</p><p class="what">{{tl3_what}}</p><p class="note">{{tl3_note}}</p></li>
+      <li><p class="when">2019</p><p class="what">{{tl4_what}}</p><p class="note">{{tl4_note}}</p></li>
+      <li><p class="when">2021</p><p class="what">{{tl5_what}}</p><p class="note">{{tl5_note}}</p></li>
+      <li><p class="when warm">2025</p><p class="what">Home+ Air &amp; Heat</p><p class="note">{{tl6_note}}</p></li>
+    </ol>
+  </section>
+
+  <section class="takeo" aria-labelledby="takeo-h">
+    <div class="wrap">
+      <div class="takeo-text">
+        <p class="eyebrow">{{takeo_eyebrow}}</p>
+        <h2 id="takeo-h" class="serif">Takeo.AI</h2>
+        <p>{{takeo_p}}</p>
+        <a class="more" href="https://takeo.ai/">{{takeo_more}} {{arrow}}</a>
+      </div>
+      <div class="figs">
+        <div class="fig"><p class="num">{{fig1_num}}</p><p class="label">{{fig1_label}}</p></div>
+        <div class="fig"><p class="num">{{fig2_num}}</p><p class="label">{{fig2_label}}</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="techeo" class="wrap techeo" aria-labelledby="techeo-h">
+    <p id="techeo-h" class="eyebrow">{{techeo_eyebrow}}</p>
+    <blockquote>{{techeo_quote}}</blockquote>
+    <p class="body">{{techeo_body}}</p>
+    <div class="ctas"><a class="btn" href="https://www.techeo.com/">{{techeo_cta}}</a></div>
+  </section>
+
+  <section id="ventures" class="wrap ventures" aria-labelledby="ventures-h">
+    <h2 id="ventures-h" class="serif">{{ventures_h2}}</h2>
+    <div class="cards">
+      <a class="card" href="https://www.techeo.com/"><span class="role">{{card1_role}}</span><span class="name">Techeo</span><span class="desc">{{card1_desc}}</span></a>
+      <a class="card" href="https://hometsair.com/"><span class="role">{{card2_role}}</span><span class="name">Home+ Air &amp; Heat</span><span class="desc">{{card2_desc}}</span></a>
+      <a class="card" href="https://takeo.ai/"><span class="role">{{card3_role}}</span><span class="name">Takeo.AI</span><span class="desc">{{card3_desc}}</span></a>
+    </div>
+    <p class="also">{{also_html}}</p>
+  </section>
+
+  <section id="press" class="wrap press" aria-label="{{press_label}}">
+    <a class="press-item" href="https://www.youtube.com/watch?v=J69FjQbMue4">
+      <span class="kind">{{press1_kind}}</span>
+      <span class="title">{{press1_title}}</span>
+      <span class="go">{{press1_go}} {{arrow}}</span>
+    </a>
+    <div class="press-item">
+      <span class="kind">{{press2_kind}}</span>
+      <span class="title">{{press2_title}}</span>
+      <a class="go" href="https://www.linkedin.com/in/blakeruwali">{{press2_go}} {{arrow}}</a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>© 2026 Blake Ruwali · {{foot_city}}</p>
+    <nav aria-label="{{foot_label}}">
+      <a href="https://www.linkedin.com/in/blakeruwali" rel="me">LinkedIn</a>
+      <a href="https://www.instagram.com/blakeruwali/" rel="me">Instagram</a>
+      <a href="https://www.crunchbase.com/person/blake-ruwali" rel="me">Crunchbase</a>
+      <a href="https://theorg.com/org/techeo/person/blake-ruwali" rel="me">The Org</a>
+      <a href="https://www.youtube.com/watch?v=J69FjQbMue4">YouTube</a>
+      <a href="https://github.com/blakeruwali" rel="me">GitHub</a>
+      <a href="https://hometsair.com/people/blake-ruwali" rel="me">{{foot_home}}</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
