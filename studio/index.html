@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Private owner dashboard. Not linked from the site, not in sitemap.xml, never indexed. -->
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://*.supabase.co wss://*.supabase.co http://127.0.0.1:56321; base-uri 'none'; form-action 'none'; object-src 'none'">
+<title>Social HQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@500;700;800&display=swap">
+<link rel="stylesheet" href="studio.css">
+<script src="vendor/supabase-js-2.45.4.min.js" defer></script>
+<script src="config.js" defer></script>
+<script type="module" src="js/app.js"></script>
+</head>
+<body>
+
+<section class="gate" id="gate" hidden aria-labelledby="gate-title">
+  <form class="card" id="signin">
+    <h1 id="gate-title">Social <span class="y">HQ</span></h1>
+    <p class="soft" id="gate-text">Owner sign-in. We email you a one-time link.</p>
+    <label for="email" class="muted">Email</label>
+    <input id="email" type="email" autocomplete="email" required>
+    <button class="btn" type="submit">Email me a sign-in link</button>
+    <p class="msg" id="gate-msg" role="status"></p>
+  </form>
+</section>
+
+<div id="app" hidden>
+  <header class="topbar">
+    <div class="wrap">
+      <span class="brand">Social <b>HQ</b></span>
+      <span class="stamp" id="stamp"></span>
+      <span class="spacer"></span>
+      <button class="btn ghost small" id="refresh" type="button">Refresh</button>
+      <button class="btn ghost small" id="signout" type="button">Sign out</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="goal" aria-labelledby="goal-title">
+      <div class="goal-top">
+        <div>
+          <p class="eyebrow">Goal by May 31, 2027</p>
+          <h1 id="goal-title">100K <span class="y">Facebook</span> + 100K <span class="y">Instagram</span></h1>
+        </div>
+        <div class="goal-days"><div class="big num" id="days-left">—</div><div class="muted">days left</div></div>
+      </div>
+      <div class="goal-rows" id="goal-rows"></div>
+    </section>
+
+    <section aria-label="Cross-channel totals"><div class="kpis" id="kpis"></div></section>
+
+    <section aria-labelledby="ch-title">
+      <div class="section-head"><h2 id="ch-title">Channels</h2><p>Daily change uses New York days. Follows per 1K views = followers gained ÷ views × 1,000.</p></div>
+      <div class="channels" id="channels"></div>
+    </section>
+
+    <section class="split" aria-label="Channel comparison">
+      <div class="panel">
+        <div class="section-head"><h2>Views by channel</h2><p>Latest count on every tracked post</p></div>
+        <ul class="bars" id="bars-views"></ul>
+      </div>
+      <div class="panel">
+        <div class="section-head"><h2>Follows per 1K views</h2><p>The key metric. Blank until a channel has two follower counts.</p></div>
+        <ul class="bars" id="bars-f1k"></ul>
+      </div>
+    </section>
+
+    <section aria-labelledby="top-title">
+      <div class="section-head"><h2 id="top-title">Top posts</h2><p id="top-note"></p></div>
+      <div class="toolbar">
+        <div class="seg" role="group" aria-label="Sort posts by" id="sort-seg">
+          <button type="button" data-sort="views" aria-pressed="true">Views</button>
+          <button type="button" data-sort="follows_per_1k" aria-pressed="false">Follows / 1K</button>
+          <button type="button" data-sort="hold_3s_pct" aria-pressed="false">3-s hold</button>
+          <button type="button" data-sort="interactions" aria-pressed="false">Interactions</button>
+        </div>
+        <label class="muted small-text" for="ch-filter">Channel</label>
+        <select id="ch-filter"><option value="">All channels</option></select>
+      </div>
+      <div class="table-wrap"><table id="top-posts"></table></div>
+    </section>
+
+    <section aria-labelledby="xp-title">
+      <div class="section-head"><h2 id="xp-title">Same post, every channel</h2><p>Views per channel for each piece of content</p></div>
+      <div class="table-wrap"><table id="crosspost"></table></div>
+    </section>
+
+    <section class="panel" aria-labelledby="ai-title">
+      <div class="section-head"><h2 id="ai-title">Comment “AI”</h2><p>Comments asking for the guide, and whether it went out. Written by the auto-DM job.</p></div>
+      <div class="ai-stats" id="ai-stats"></div>
+      <div class="toolbar">
+        <div class="seg" role="group" aria-label="Filter comments by status" id="ai-seg">
+          <button type="button" data-status="" aria-pressed="true">All</button>
+          <button type="button" data-status="pending" aria-pressed="false">Waiting</button>
+          <button type="button" data-status="failed" aria-pressed="false">Failed</button>
+          <button type="button" data-status="sent" aria-pressed="false">Sent</button>
+        </div>
+      </div>
+      <div class="table-wrap"><table id="ai-table"></table></div>
+    </section>
+
+    <section aria-labelledby="src-title">
+      <div class="section-head"><h2 id="src-title">Data sources</h2><p>Last pull per channel. Keys live in the Supabase secret store, never in this page.</p></div>
+      <div class="sources" id="sources"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="imp-title">
+      <div class="section-head"><h2 id="imp-title">Add numbers by hand</h2><p>For Facebook, LinkedIn and anything an API can’t reach yet</p></div>
+      <div class="import-grid">
+        <div>
+          <label for="csv" class="soft small-text">Paste CSV, or choose a file</label>
+          <textarea id="csv" spellcheck="false" placeholder="type,channel,captured_at,followers,post_key,content_key,title,format,posted_at,url,duration_sec,views,reach,avg_watch_sec,three_sec_views,one_min_views,likes,comments,shares,saves,follows,profile_visits,engaged,non_follower_pct"></textarea>
+          <div class="form-row">
+            <input type="file" id="csv-file" accept=".csv,text/csv">
+            <button class="btn" id="csv-import" type="button">Import CSV</button>
+            <button class="btn ghost small" id="csv-template" type="button">Download template</button>
+          </div>
+          <p class="msg" id="csv-msg" role="status"></p>
+          <details><summary>CSV format</summary>
+            <p class="soft small-text">One row per follower count (<code>type=followers</code>) or per post snapshot (<code>type=post</code>). <code>channel</code> is one of facebook, instagram, tiktok, youtube, x, threads, linkedin, pinterest. Use the same <code>content_key</code> (like <code>day2-reel</code>) for the same piece on every channel. Leave unknown numbers blank, not 0.</p>
+          </details>
+        </div>
+        <form id="quick-followers">
+          <p class="soft small-text tight">Quick follower count</p>
+          <div class="form-row">
+            <select id="qf-channel" aria-label="Channel" required></select>
+            <input id="qf-count" type="number" min="0" step="1" placeholder="Followers" aria-label="Followers" required>
+          </div>
+          <div class="form-row">
+            <input id="qf-time" type="datetime-local" aria-label="Counted at">
+            <button class="btn" type="submit">Save</button>
+          </div>
+          <p class="msg" id="qf-msg" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+</div>
+
+<noscript><p class="noscript">This page needs JavaScript.</p></noscript>
+</body>
+</html>
