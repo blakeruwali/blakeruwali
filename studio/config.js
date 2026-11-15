@@ -9,8 +9,8 @@
         supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0",
       }
     : {
-        // Fill in after creating the Supabase project (docs/social-dashboard.md, step 1).
-        supabaseUrl: "",
-        supabaseAnonKey: "",
+        // Supabase project "blake-social" (publishable key; public by design).
+        supabaseUrl: "https://yexmolawvdjcqctyqbpu.supabase.co",
+        supabaseAnonKey: "sb_publishable_V8e1eJhaMUsHMPBUHvK-tg_t57gduiV",
       };
 })();
