@@ -77,6 +77,11 @@
   .steps p { font-size: 14.5px; }
   .where { list-style: none; padding: 0; display: grid; gap: 6px; font-size: 15px; }
   .where li b { color: var(--text); }
+  .tools { list-style: none; padding: 0; display: grid; gap: 8px; }
+  .tools li { background: var(--band); border-radius: 12px; padding: 12px 14px; box-shadow: inset 0 0 0 1px var(--line); font-size: 15px; }
+  .tools b { color: var(--text); }
+  .more { display: inline-block; margin-top: 16px; color: var(--accent); font-weight: 800; font-size: 14px; letter-spacing: .6px; text-transform: uppercase; text-decoration: none; }
+  .more:hover { text-decoration: underline; }
 
 
   .foot { margin-top: 36px; display: grid; gap: 14px; justify-items: start; padding: 22px; border-radius: 16px; border: 2px solid transparent;
@@ -128,6 +133,19 @@
         <li><b>Furnace:</b> inside the front door.</li>
         <li><b>Water heater:</b> on the tank, near the bottom.</li>
       </ul>
+    </article>
+
+    <article class="day" id="day-1" aria-labelledby="d1">
+      <div class="meta"><span class="daynum">Day 1</span><span class="date">Nov 14, 2026</span></div>
+      <h2 id="d1">The AI tools I use to run my company</h2>
+      <p class="lede">What I actually use every week at Home+ Air &amp; Heat.</p>
+      <ul class="tools">
+        <li><b>Claude:</b> my AI assistant. It updates our price book, builds estimates, drafts emails and does the admin work.</li>
+        <li><b>ServiceTitan:</b> our field software. Jobs, scheduling and invoices live here, and the AI works on top of it.</li>
+        <li><b>Lovable + Supabase:</b> how I built my own estimate and follow-up dashboard.</li>
+        <li><b>Higgsfield:</b> the AI images, video and voice in my daily posts.</li>
+      </ul>
+      <a class="more" href="/ai-tools-for-hvac-owners/">The full guide: AI tools for HVAC owners →</a>
     </article>
 
   </div>
