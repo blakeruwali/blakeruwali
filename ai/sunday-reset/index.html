@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Sunday AI Reset: 5 prompts, 30 minutes | Blake Ruwali</title>
+<meta name="description" content="Five copy-paste AI prompts to plan your week in 30 minutes, plus 3 bonus prompts. Works in ChatGPT, Claude or Gemini.">
+<link rel="canonical" href="https://www.blakeruwali.com/ai/sunday-reset/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Sunday AI Reset: 5 prompts, 30 minutes">
+<meta property="og:description" content="Plan your whole week with AI in one chat. 5 prompts plus 3 bonus prompts.">
+<meta property="og:url" content="https://www.blakeruwali.com/ai/sunday-reset/">
+<meta property="og:image" content="https://www.blakeruwali.com/assets/blake-ruwali.jpg">
+<meta name="author" content="Blake Ruwali">
+<meta name="theme-color" content="#090E25">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #090E25; --band: #0D1433; --card: #131B40; --line: #1F2852; --line2: #2C3868;
+    --text: #FFFFFF; --soft: #C3C8DA; --muted: #8A91AD; --accent: #FF7E2E;
+    --grad: linear-gradient(100deg, #C24A00, #9D1B78); --yellow: #FACC15;
+    --font: "Avenir Next", Avenir, Montserrat, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --display: "Archivo Black", "Arial Black", var(--font);
+  }
+  * { box-sizing: border-box; }
+  html { overflow-x: clip; }
+  body { margin: 0; background: var(--bg); color: var(--soft); font: 500 16px/1.55 var(--font); -webkit-font-smoothing: antialiased; }
+  a { color: var(--accent); }
+  p, ol, ul, h1, h2, h3 { margin: 0; }
+  .wrap { position: relative; max-width: 860px; margin: 0 auto; padding: 28px 24px 64px; }
+  .wrap::before { content: ""; position: absolute; inset: -40px 10% auto; height: 340px; z-index: -1; pointer-events: none;
+    background: radial-gradient(closest-side, rgba(194, 74, 0, .35), transparent), radial-gradient(closest-side at 70% 40%, rgba(157, 27, 120, .4), transparent); filter: blur(30px); }
+  @media (max-width: 480px) { .wrap { padding: 20px 16px 48px; } }
+
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 40px; }
+  .brand { color: var(--text); text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: .4px; font-size: 18px; white-space: nowrap; }
+  .brand::after { content: ""; display: inline-block; width: 7px; height: 7px; margin-left: 5px; border-radius: 2px; background: var(--grad); }
+  .top .follow { color: var(--text); text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; }
+  .top .follow:hover { color: var(--accent); }
+
+  .head { display: grid; gap: 14px; justify-items: start; margin-bottom: 36px; }
+  .pill { background: var(--grad); color: #FFF; font-weight: 700; text-transform: uppercase; font-size: 13px; line-height: 1; padding: 8px 11px 7px; border-radius: 8px; }
+  h1 { font-family: var(--display); font-weight: 400; color: var(--text); text-transform: uppercase; font-size: clamp(36px, 7vw, 64px); line-height: .98; letter-spacing: -.3px; }
+  .sub { font-size: 18px; max-width: 56ch; }
+
+  .days { display: grid; gap: 22px; }
+  .day { background: var(--card); border-radius: 18px; padding: 24px 24px 22px; box-shadow: inset 0 0 0 1px var(--line); }
+  .day.new { border: 2px solid transparent; box-shadow: 0 20px 60px -30px rgba(157, 27, 120, .7);
+    background: linear-gradient(var(--card), var(--card)) padding-box, var(--grad) border-box; }
+  @media (max-width: 480px) { .day { padding: 20px 16px 18px; border-radius: 14px; } }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 10px; }
+  .daynum { font-family: var(--display); color: var(--yellow); font-size: 15px; letter-spacing: .5px; text-transform: uppercase; }
+  .date { color: var(--muted); font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+  .tag { font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: #FFF; background: var(--grad); padding: 4px 7px 3px; border-radius: 6px; }
+  h2 { font-family: var(--display); font-weight: 400; color: var(--text); text-transform: uppercase; font-size: clamp(22px, 3.6vw, 30px); line-height: 1.08; margin-bottom: 8px; }
+  .lede { font-size: 16.5px; margin-bottom: 18px; }
+  h3 { color: var(--text); font-size: 13px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; margin: 20px 0 10px; }
+
+  .prompt { position: relative; background: var(--band); border-radius: 12px; box-shadow: inset 0 0 0 1px var(--line2); }
+  .prompt-bar { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 10px 10px 14px; border-bottom: 1px solid var(--line); }
+  .prompt-bar span { color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+  .copy { font: inherit; font-size: 13px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; color: #FFF; background: var(--grad); border: 0; border-radius: 9px; padding: 10px 16px; cursor: pointer; min-width: 92px; transition: transform .15s ease, filter .15s ease; }
+  .copy:hover { filter: brightness(1.12); }
+  .copy:active { transform: scale(.97); }
+  .copy:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
+  .prompt pre { margin: 0; padding: 14px 16px 16px; white-space: pre-wrap; word-wrap: break-word; color: var(--text); font: 500 15.5px/1.6 var(--font); }
+  .works { margin-top: 10px; font-size: 14px; color: var(--muted); }
+  .works b { color: var(--soft); }
+
+  .steps { list-style: none; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(3, 1fr); counter-reset: s; }
+  @media (max-width: 680px) { .steps { grid-template-columns: 1fr; } }
+  .steps li { counter-increment: s; background: var(--band); border-radius: 12px; padding: 14px 14px 13px; box-shadow: inset 0 0 0 1px var(--line); }
+  .steps li::before { content: "0" counter(s); display: block; font-family: var(--display); font-size: 13px; color: var(--accent); margin-bottom: 4px; }
+  .steps b { display: block; color: var(--text); text-transform: uppercase; font-size: 15px; letter-spacing: .4px; margin-bottom: 4px; }
+  .steps p { font-size: 14.5px; }
+  .where { list-style: none; padding: 0; display: grid; gap: 6px; font-size: 15px; }
+  .where li b { color: var(--text); }
+  .tools { list-style: none; padding: 0; display: grid; gap: 8px; }
+  .tools li { background: var(--band); border-radius: 12px; padding: 12px 14px; box-shadow: inset 0 0 0 1px var(--line); font-size: 15px; }
+  .tools b { color: var(--text); }
+  .more { display: inline-block; margin-top: 16px; color: var(--accent); font-weight: 800; font-size: 14px; letter-spacing: .6px; text-transform: uppercase; text-decoration: none; }
+  .more:hover { text-decoration: underline; }
+
+
+  .foot { margin-top: 36px; display: grid; gap: 14px; justify-items: start; padding: 22px; border-radius: 16px; border: 2px solid transparent;
+    background: linear-gradient(var(--band), var(--band)) padding-box, var(--grad) border-box; }
+  .foot strong { font-family: var(--display); font-weight: 400; color: var(--text); text-transform: uppercase; font-size: clamp(20px, 3.4vw, 26px); line-height: 1.1; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; }
+  .links a { display: inline-block; color: var(--text); text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: .6px; padding: 9px 13px; border-radius: 9px; box-shadow: inset 0 0 0 1px var(--line2); transition: background .15s ease, box-shadow .15s ease; }
+  .links a:hover, .links a:focus-visible { background: rgba(255, 126, 46, .12); box-shadow: inset 0 0 0 1px var(--accent); }
+  .small { margin-top: 14px; font-size: 13px; color: var(--muted); }
+  .small a { color: var(--soft); }
+  @media (prefers-reduced-motion: reduce) { .copy { transition: none; } }
+  .why { margin-top: 12px; font-size: 15px; }
+  .why b { color: var(--text); }
+  .warn { margin-top: 4px; padding: 12px 14px; border-radius: 12px; background: rgba(250, 204, 21, .08); box-shadow: inset 0 0 0 1px rgba(250, 204, 21, .35); font-size: 15px; color: var(--soft); max-width: 60ch; }
+  .warn b { color: var(--yellow); }
+  .section-h { font-family: var(--display); font-weight: 400; color: var(--text); text-transform: uppercase; font-size: clamp(24px, 4vw, 34px); margin: 40px 0 16px; }
+  .next { display: grid; gap: 8px; margin-top: 36px; padding: 22px; border-radius: 16px; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); }
+  .next strong { color: var(--text); font-size: 17px; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="top">
+    <a class="brand" href="/">Blake Ruwali</a>
+    <a class="follow" href="/ai/">All prompts →</a>
+  </header>
+
+  <section class="head" aria-labelledby="t">
+    <p class="pill">Day 2 · Sunday AI Reset</p>
+    <h1 id="t">The Sunday AI Reset: 5 prompts, 30 minutes</h1>
+    <p class="sub">Plan your whole week in one chat. Works in <b>ChatGPT</b>, <b>Claude</b> or <b>Gemini</b>. Run the prompts in order and save this page for next Sunday.</p>
+    <p class="warn"><b>Never paste</b> passwords, bank or card numbers, or anyone else's private details. Swap names for initials if a message is sensitive.</p>
+  </section>
+
+  <div class="days">
+    <article class="day" id="start" aria-labelledby="h0">
+      <div class="meta"><span class="daynum">Start here</span><span class="date">Paste once</span></div>
+      <h2 id="h0">Set up your planning partner</h2>
+      <p class="lede">Open one new chat and paste this first. Then run prompts 1 to 5 in the same chat, in order, so prompt 5 can see everything from 1 to 4.</p>
+      <div class="prompt">
+        <div class="prompt-bar"><span>Copy-paste prompt</span><button class="copy" type="button" data-copy="p0" aria-live="polite">Copy</button></div>
+        <pre id="p0">For the next 30 minutes you&#x27;re my weekly planning partner. I run [what you do: a business / a job / school]. Be direct and practical. Short answers, plain English, no motivational fluff. If something I share doesn&#x27;t add up, say so. Wait for my first list.</pre>
+      </div>
+    </article>
+    <article class="day" id="prompt-1" aria-labelledby="h1">
+      <div class="meta"><span class="daynum">Prompt 1</span><span class="date">8 min</span></div>
+      <h2 id="h1">Empty your head</h2>
+      <div class="prompt">
+        <div class="prompt-bar"><span>Copy-paste prompt</span><button class="copy" type="button" data-copy="p1" aria-live="polite">Copy</button></div>
+        <pre id="p1">Here&#x27;s everything on my mind for this week, in no order:
+[paste a messy list: tasks, worries, ideas, errands]
+
+Sort it into four groups: Must do this week / Should do / Can wait / Hand off or drop.
+Then give me my top 3 for the week, and one sentence on why each one matters.
+Be ruthless. If something looks like busywork, tell me.</pre>
+      </div>
+      <p class="why"><b>Why it works:</b> your head stops being the to-do list. A messy list in, a clear week out.</p>
+    </article>
+    <article class="day" id="prompt-2" aria-labelledby="h2">
+      <div class="meta"><span class="daynum">Prompt 2</span><span class="date">6 min</span></div>
+      <h2 id="h2">Fix your calendar</h2>
+      <div class="prompt">
+        <div class="prompt-bar"><span>Copy-paste prompt</span><button class="copy" type="button" data-copy="p2" aria-live="polite">Copy</button></div>
+        <pre id="p2">Here&#x27;s my calendar for this week:
+[paste it, or type: Mon 9–10 team call, Tue 2–4 client visit, ...]
+
+My top 3 from before are on this chat. Where am I overbooked? What can I move, shorten or cancel?
+Find me two 90-minute blocks for focused work on my top 3, and tell me which day is my riskiest.</pre>
+      </div>
+      <p class="why"><b>Why it works:</b> you protect the time before someone else takes it.</p>
+    </article>
+    <article class="day" id="prompt-3" aria-labelledby="h3">
+      <div class="meta"><span class="daynum">Prompt 3</span><span class="date">6 min</span></div>
+      <h2 id="h3">Clear what you owe people</h2>
+      <div class="prompt">
+        <div class="prompt-bar"><span>Copy-paste prompt</span><button class="copy" type="button" data-copy="p3" aria-live="polite">Copy</button></div>
+        <pre id="p3">Here are the messages I still owe a reply (I&#x27;ve removed private details):
+[paste each one, or a one-line summary of each]
+
+Which ones need me this week, and which can wait or be a one-liner?
+Draft a reply of two lines or less for each one that needs me. Match this tone: [friendly / direct / formal].</pre>
+      </div>
+      <p class="why"><b>Why it works:</b> the guilt pile goes to zero, and AI does the typing while you decide what&#x27;s sent.</p>
+    </article>
+    <article class="day" id="prompt-4" aria-labelledby="h4">
+      <div class="meta"><span class="daynum">Prompt 4</span><span class="date">5 min</span></div>
+      <h2 id="h4">Plan your body, not just your work</h2>
+      <div class="prompt">
+        <div class="prompt-bar"><span>Copy-paste prompt</span><button class="copy" type="button" data-copy="p4" aria-live="polite">Copy</button></div>
+        <pre id="p4">Plan my workouts and meals for this week.
+I have [X] minutes a day to move, I cook [X] nights, and I [any limits: no gym / vegetarian / early mornings].
+Keep it simple and repeatable. Give me a day-by-day plan and one grocery list grouped by store aisle.</pre>
+      </div>
+      <p class="why"><b>Why it works:</b> energy is the thing every plan runs on.</p>
+    </article>
+    <article class="day" id="prompt-5" aria-labelledby="h5">
+      <div class="meta"><span class="daynum">Prompt 5</span><span class="date">5 min</span></div>
+      <h2 id="h5">Ask the honest question</h2>
+      <div class="prompt">
+        <div class="prompt-bar"><span>Copy-paste prompt</span><button class="copy" type="button" data-copy="p5" aria-live="polite">Copy</button></div>
+        <pre id="p5">Based on everything I shared today: what am I avoiding?
+If I only did one thing this week, what would make it a win?
+Give me the first 15-minute step for that one thing, something I can start Monday morning.</pre>
+      </div>
+      <p class="why"><b>Why it works:</b> this is the one that changes my week, and the answer is usually the whole week.</p>
+    </article>
+  </div>
+
+  <h2 class="section-h">Bonus prompts from my other videos</h2>
+  <div class="days">
+    <article class="day" id="number-three" aria-labelledby="hb0">
+      <div class="meta"><span class="daynum">Bonus</span><span class="date">From “Number three”</span></div>
+      <h2 id="hb0">Let AI draft the work you keep redoing</h2>
+      <div class="prompt">
+        <div class="prompt-bar"><span>Copy-paste prompt</span><button class="copy" type="button" data-copy="p6" aria-live="polite">Copy</button></div>
+        <pre id="p6">I keep writing the same kinds of messages: [emails / quotes / follow-ups].
+Here are 3 examples I sent before: [paste, private details removed].
+Turn them into a reusable template with blanks in [brackets], in my tone.
+Then write today&#x27;s version for: [the situation].</pre>
+      </div>
+<p class="why"><b>Rule:</b> AI drafts, you decide. Read every word before you send.</p>
+    </article>
+    <article class="day" id="talk-to-10" aria-labelledby="hb1">
+      <div class="meta"><span class="daynum">Bonus</span><span class="date">Step 2 of “If I lost everything tomorrow”</span></div>
+      <h2 id="hb1">Talk to 10 people first</h2>
+      <div class="prompt">
+        <div class="prompt-bar"><span>Copy-paste prompt</span><button class="copy" type="button" data-copy="p7" aria-live="polite">Copy</button></div>
+        <pre id="p7">I want to solve this problem: [the problem you&#x27;ve been annoyed by for years].
+Write 8 short questions I can ask 10 people who have this problem.
+No leading questions and no pitching. Focus on what they do today, what it costs them, and what they&#x27;ve already tried.</pre>
+      </div>
+
+    </article>
+    <article class="day" id="automate" aria-labelledby="hb2">
+      <div class="meta"><span class="daynum">Bonus</span><span class="date">Step 5 of “If I lost everything tomorrow”</span></div>
+      <h2 id="hb2">Automate what you’ve already done 100 times</h2>
+      <div class="prompt">
+        <div class="prompt-bar"><span>Copy-paste prompt</span><button class="copy" type="button" data-copy="p8" aria-live="polite">Copy</button></div>
+        <pre id="p8">Here&#x27;s a task I do by hand every week: [describe the steps].
+Break it into steps, mark which ones AI or a simple tool could do, and which need me.
+Suggest the simplest setup to automate the first part, with no coding if possible.</pre>
+      </div>
+
+    </article>
+  </div>
+
+  <aside class="next">
+    <strong>Also from Day 2: how old is your AC, furnace or water heater?</strong>
+    <p>One photo of the data plate and one prompt tell you.</p>
+    <a class="more" href="/ai/#day-2">Get the prompt →</a>
+  </aside>
+
+  <footer class="foot" id="follow">
+    <strong>New tool every day. Follow @blakeruwali</strong>
+    <ul class="links">
+      <li><a href="https://www.instagram.com/blakeruwali/">Instagram</a></li>
+      <li><a href="https://www.tiktok.com/@blakeruwali">TikTok</a></li>
+      <li><a href="https://www.youtube.com/@blakeruwali">YouTube</a></li>
+      <li><a href="https://x.com/blakeruwali">X</a></li>
+      <li><a href="https://www.linkedin.com/in/blakeruwali">LinkedIn</a></li>
+      <li><a href="https://www.threads.com/@blakeruwali">Threads</a></li>
+    </ul>
+  </footer>
+  <p class="small">AI drafts, you decide. Check what it gives you before you act on it. <a href="/">More about me</a></p>
+</main>
+<script>
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = document.getElementById(btn.dataset.copy).textContent;
+      var done = function (ok) {
+        btn.textContent = ok ? 'Copied' : 'Select & copy';
+        setTimeout(function () { btn.textContent = 'Copy'; }, 2000);
+      };
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(fallback(text)); });
+      } else { done(fallback(text)); }
+    });
+  });
+  function fallback(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+</script>
+</body>
+</html>
