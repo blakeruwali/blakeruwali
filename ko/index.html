@@ -197,6 +197,22 @@
       "founder": {
         "@id": "https://www.blakeruwali.com/#person"
       }
+    },
+    {
+      "@type": "NGO",
+      "@id": "https://www.blakeruwali.com/#aihorizons",
+      "name": "AI Horizons Society",
+      "founder": {
+        "@id": "https://www.blakeruwali.com/#person"
+      }
+    },
+    {
+      "@type": "NGO",
+      "@id": "https://www.blakeruwali.com/#litennis",
+      "name": "Long Island Tennis Club",
+      "founder": {
+        "@id": "https://www.blakeruwali.com/#person"
+      }
     }
   ]
 }
@@ -352,6 +368,8 @@
   .card .role { font-size: 12px; font-weight: 700; letter-spacing: 1.4px; color: var(--cyan); }
   .card .name { font-size: 24px; font-weight: 800; text-transform: uppercase; }
   .card .desc { color: var(--soft); font-size: 16px; }
+  .card.nolink::after { content: none; }
+  .card.nolink:hover { box-shadow: inset 0 0 0 1px var(--line); transform: none; }
   .also { margin-top: 20px; font-size: 15px; color: var(--muted); }
   .also a { color: var(--text); text-decoration-color: var(--cyan); text-underline-offset: 3px; }
 
@@ -624,8 +642,11 @@
       <a class="card" href="https://www.techeo.com/"><span class="role">창업자</span><span class="name">Techeo</span><span class="desc">냉난방·배관 회사를 위한 성장 파트너.</span></a>
       <a class="card" href="https://hometsair.com/"><span class="role">창업자 · 2025년부터</span><span class="name">Home+ Air &amp; Heat</span><span class="desc">롱아일랜드와 뉴욕시의 냉난방.</span></a>
       <a class="card" href="https://takeo.ai/"><span class="role">소유주 · 2019~2025년 CEO</span><span class="name">Takeo.AI</span><span class="desc">기술 부트캠프, 커리어 서비스, 컨설팅.</span></a>
+      <a class="card" href="https://complusmechanical.com/"><span class="role">창업자</span><span class="name">Com+ Mechanical</span><span class="desc">뉴욕시와 롱아일랜드 건물을 위한 상업용 냉난방.</span></a>
+      <div class="card nolink"><span class="role">창업자</span><span class="name">AI Horizons Society</span><span class="desc">AI에 집중하는 비영리 단체.</span></div>
+      <div class="card nolink"><span class="role">창업자</span><span class="name">Long Island Tennis Club</span><span class="desc">롱아일랜드의 비영리 테니스 클럽.</span></div>
     </div>
-    <p class="also">그 밖에 창업한 회사: <a href="https://complusmechanical.com/">Com+ Mechanical</a>(상업용 HVAC), <a href="https://longislandhvacrepair.com/">Long Island HVAC Repair</a>.</p>
+    <p class="also">그 밖에 창업한 회사: <a href="https://longislandhvacrepair.com/">Long Island HVAC Repair</a>.</p>
   </section>
 
   <section id="press" class="wrap press" aria-label="언론">

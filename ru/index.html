@@ -197,6 +197,22 @@
       "founder": {
         "@id": "https://www.blakeruwali.com/#person"
       }
+    },
+    {
+      "@type": "NGO",
+      "@id": "https://www.blakeruwali.com/#aihorizons",
+      "name": "AI Horizons Society",
+      "founder": {
+        "@id": "https://www.blakeruwali.com/#person"
+      }
+    },
+    {
+      "@type": "NGO",
+      "@id": "https://www.blakeruwali.com/#litennis",
+      "name": "Long Island Tennis Club",
+      "founder": {
+        "@id": "https://www.blakeruwali.com/#person"
+      }
     }
   ]
 }
@@ -352,6 +368,8 @@
   .card .role { font-size: 12px; font-weight: 700; letter-spacing: 1.4px; color: var(--cyan); }
   .card .name { font-size: 24px; font-weight: 800; text-transform: uppercase; }
   .card .desc { color: var(--soft); font-size: 16px; }
+  .card.nolink::after { content: none; }
+  .card.nolink:hover { box-shadow: inset 0 0 0 1px var(--line); transform: none; }
   .also { margin-top: 20px; font-size: 15px; color: var(--muted); }
   .also a { color: var(--text); text-decoration-color: var(--cyan); text-underline-offset: 3px; }
 
@@ -624,8 +642,11 @@
       <a class="card" href="https://www.techeo.com/"><span class="role">ОСНОВАТЕЛЬ</span><span class="name">Techeo</span><span class="desc">Партнёр по росту для компаний в сфере отопления, кондиционирования и сантехники.</span></a>
       <a class="card" href="https://hometsair.com/"><span class="role">ОСНОВАТЕЛЬ · С 2025</span><span class="name">Home+ Air &amp; Heat</span><span class="desc">Отопление и кондиционирование на Лонг-Айленде и в Нью-Йорке.</span></a>
       <a class="card" href="https://takeo.ai/"><span class="role">ВЛАДЕЛЕЦ · CEO 2019–2025</span><span class="name">Takeo.AI</span><span class="desc">Технологические буткемпы, карьерные услуги и консалтинг.</span></a>
+      <a class="card" href="https://complusmechanical.com/"><span class="role">ОСНОВАТЕЛЬ</span><span class="name">Com+ Mechanical</span><span class="desc">Коммерческое отопление и кондиционирование для зданий в Нью-Йорке и на Лонг-Айленде.</span></a>
+      <div class="card nolink"><span class="role">ОСНОВАТЕЛЬ</span><span class="name">AI Horizons Society</span><span class="desc">Некоммерческая организация, посвящённая ИИ.</span></div>
+      <div class="card nolink"><span class="role">ОСНОВАТЕЛЬ</span><span class="name">Long Island Tennis Club</span><span class="desc">Некоммерческий теннисный клуб на Лонг-Айленде.</span></div>
     </div>
-    <p class="also">Также основал: <a href="https://complusmechanical.com/">Com+ Mechanical</a> (коммерческие системы HVAC) и <a href="https://longislandhvacrepair.com/">Long Island HVAC Repair</a>.</p>
+    <p class="also">Также основал: <a href="https://longislandhvacrepair.com/">Long Island HVAC Repair</a>.</p>
   </section>
 
   <section id="press" class="wrap press" aria-label="Пресса">

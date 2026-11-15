@@ -197,6 +197,22 @@
       "founder": {
         "@id": "https://www.blakeruwali.com/#person"
       }
+    },
+    {
+      "@type": "NGO",
+      "@id": "https://www.blakeruwali.com/#aihorizons",
+      "name": "AI Horizons Society",
+      "founder": {
+        "@id": "https://www.blakeruwali.com/#person"
+      }
+    },
+    {
+      "@type": "NGO",
+      "@id": "https://www.blakeruwali.com/#litennis",
+      "name": "Long Island Tennis Club",
+      "founder": {
+        "@id": "https://www.blakeruwali.com/#person"
+      }
     }
   ]
 }
@@ -352,6 +368,8 @@
   .card .role { font-size: 12px; font-weight: 700; letter-spacing: 1.4px; color: var(--cyan); }
   .card .name { font-size: 24px; font-weight: 800; text-transform: uppercase; }
   .card .desc { color: var(--soft); font-size: 16px; }
+  .card.nolink::after { content: none; }
+  .card.nolink:hover { box-shadow: inset 0 0 0 1px var(--line); transform: none; }
   .also { margin-top: 20px; font-size: 15px; color: var(--muted); }
   .also a { color: var(--text); text-decoration-color: var(--cyan); text-underline-offset: 3px; }
 
@@ -624,8 +642,11 @@
       <a class="card" href="https://www.techeo.com/"><span class="role">संस्थापक</span><span class="name">Techeo</span><span class="desc">HVAC र प्लम्बिङ कम्पनीहरूको वृद्धि साझेदार।</span></a>
       <a class="card" href="https://hometsair.com/"><span class="role">संस्थापक · 2025 देखि</span><span class="name">Home+ Air &amp; Heat</span><span class="desc">लङ आइल्यान्ड र न्युयोर्क सहरमा तताउने र चिसो पार्ने सेवा।</span></a>
       <a class="card" href="https://takeo.ai/"><span class="role">मालिक · CEO 2019 देखि 2025</span><span class="name">Takeo.AI</span><span class="desc">प्रविधि बुटक्याम्प, करियर सेवा र परामर्श।</span></a>
+      <a class="card" href="https://complusmechanical.com/"><span class="role">संस्थापक</span><span class="name">Com+ Mechanical</span><span class="desc">न्यूयोर्क सिटी र लङ आइल्यान्डका भवनहरूका लागि व्यावसायिक हिटिङ र कुलिङ।</span></a>
+      <div class="card nolink"><span class="role">संस्थापक</span><span class="name">AI Horizons Society</span><span class="desc">एआईमा केन्द्रित गैर-नाफामूलक संस्था।</span></div>
+      <div class="card nolink"><span class="role">संस्थापक</span><span class="name">Long Island Tennis Club</span><span class="desc">लङ आइल्यान्डको गैर-नाफामूलक टेनिस क्लब।</span></div>
     </div>
-    <p class="also">यी कम्पनी पनि स्थापना गरे: <a href="https://complusmechanical.com/">Com+ Mechanical</a> (व्यावसायिक HVAC) र <a href="https://longislandhvacrepair.com/">Long Island HVAC Repair</a>।</p>
+    <p class="also">यो पनि स्थापना गरे: <a href="https://longislandhvacrepair.com/">Long Island HVAC Repair</a>।</p>
   </section>
 
   <section id="press" class="wrap press" aria-label="सञ्चार माध्यम">
