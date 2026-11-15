@@ -197,6 +197,22 @@
       "founder": {
         "@id": "https://www.blakeruwali.com/#person"
       }
+    },
+    {
+      "@type": "NGO",
+      "@id": "https://www.blakeruwali.com/#aihorizons",
+      "name": "AI Horizons Society",
+      "founder": {
+        "@id": "https://www.blakeruwali.com/#person"
+      }
+    },
+    {
+      "@type": "NGO",
+      "@id": "https://www.blakeruwali.com/#litennis",
+      "name": "Long Island Tennis Club",
+      "founder": {
+        "@id": "https://www.blakeruwali.com/#person"
+      }
     }
   ]
 }
@@ -352,6 +368,8 @@
   .card .role { font-size: 12px; font-weight: 700; letter-spacing: 1.4px; color: var(--cyan); }
   .card .name { font-size: 24px; font-weight: 800; text-transform: uppercase; }
   .card .desc { color: var(--soft); font-size: 16px; }
+  .card.nolink::after { content: none; }
+  .card.nolink:hover { box-shadow: inset 0 0 0 1px var(--line); transform: none; }
   .also { margin-top: 20px; font-size: 15px; color: var(--muted); }
   .also a { color: var(--text); text-decoration-color: var(--cyan); text-underline-offset: 3px; }
 
@@ -624,8 +642,11 @@
       <a class="card" href="https://www.techeo.com/"><span class="role">FUNDADOR</span><span class="name">Techeo</span><span class="desc">Parceira de crescimento para empresas de climatização e encanamento.</span></a>
       <a class="card" href="https://hometsair.com/"><span class="role">FUNDADOR · DESDE 2025</span><span class="name">Home+ Air &amp; Heat</span><span class="desc">Aquecimento e ar-condicionado em Long Island e na cidade de Nova York.</span></a>
       <a class="card" href="https://takeo.ai/"><span class="role">PROPRIETÁRIO · CEO DE 2019 A 2025</span><span class="name">Takeo.AI</span><span class="desc">Bootcamps de tecnologia, serviços de carreira e consultoria.</span></a>
+      <a class="card" href="https://complusmechanical.com/"><span class="role">FUNDADOR</span><span class="name">Com+ Mechanical</span><span class="desc">Aquecimento e refrigeração comercial para prédios em Nova York e Long Island.</span></a>
+      <div class="card nolink"><span class="role">FUNDADOR</span><span class="name">AI Horizons Society</span><span class="desc">Organização sem fins lucrativos focada em IA.</span></div>
+      <div class="card nolink"><span class="role">FUNDADOR</span><span class="name">Long Island Tennis Club</span><span class="desc">Clube de tênis sem fins lucrativos em Long Island.</span></div>
     </div>
-    <p class="also">Também fundou: <a href="https://complusmechanical.com/">Com+ Mechanical</a> (climatização comercial) e <a href="https://longislandhvacrepair.com/">Long Island HVAC Repair</a>.</p>
+    <p class="also">Também fundou: <a href="https://longislandhvacrepair.com/">Long Island HVAC Repair</a>.</p>
   </section>
 
   <section id="press" class="wrap press" aria-label="Imprensa">

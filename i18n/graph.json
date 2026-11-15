@@ -148,6 +148,22 @@
       "founder": {
         "@id": "https://www.blakeruwali.com/#person"
       }
+    },
+    {
+      "@type": "NGO",
+      "@id": "https://www.blakeruwali.com/#aihorizons",
+      "name": "AI Horizons Society",
+      "founder": {
+        "@id": "https://www.blakeruwali.com/#person"
+      }
+    },
+    {
+      "@type": "NGO",
+      "@id": "https://www.blakeruwali.com/#litennis",
+      "name": "Long Island Tennis Club",
+      "founder": {
+        "@id": "https://www.blakeruwali.com/#person"
+      }
     }
   ]
 }

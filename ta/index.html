@@ -197,6 +197,22 @@
       "founder": {
         "@id": "https://www.blakeruwali.com/#person"
       }
+    },
+    {
+      "@type": "NGO",
+      "@id": "https://www.blakeruwali.com/#aihorizons",
+      "name": "AI Horizons Society",
+      "founder": {
+        "@id": "https://www.blakeruwali.com/#person"
+      }
+    },
+    {
+      "@type": "NGO",
+      "@id": "https://www.blakeruwali.com/#litennis",
+      "name": "Long Island Tennis Club",
+      "founder": {
+        "@id": "https://www.blakeruwali.com/#person"
+      }
     }
   ]
 }
@@ -352,6 +368,8 @@
   .card .role { font-size: 12px; font-weight: 700; letter-spacing: 1.4px; color: var(--cyan); }
   .card .name { font-size: 24px; font-weight: 800; text-transform: uppercase; }
   .card .desc { color: var(--soft); font-size: 16px; }
+  .card.nolink::after { content: none; }
+  .card.nolink:hover { box-shadow: inset 0 0 0 1px var(--line); transform: none; }
   .also { margin-top: 20px; font-size: 15px; color: var(--muted); }
   .also a { color: var(--text); text-decoration-color: var(--cyan); text-underline-offset: 3px; }
 
@@ -624,8 +642,11 @@
       <a class="card" href="https://www.techeo.com/"><span class="role">நிறுவனர்</span><span class="name">Techeo</span><span class="desc">HVAC மற்றும் பிளம்பிங் நிறுவனங்களுக்கான வளர்ச்சிக் கூட்டாளர்.</span></a>
       <a class="card" href="https://hometsair.com/"><span class="role">நிறுவனர் · 2025 முதல்</span><span class="name">Home+ Air &amp; Heat</span><span class="desc">லாங் ஐலண்ட் மற்றும் நியூயார்க் நகரில் வெப்பமூட்டல் மற்றும் குளிரூட்டல்.</span></a>
       <a class="card" href="https://takeo.ai/"><span class="role">உரிமையாளர் · CEO 2019 முதல் 2025 வரை</span><span class="name">Takeo.AI</span><span class="desc">தொழில்நுட்ப பூட்கேம்ப்கள், வேலைவாய்ப்புச் சேவைகள் மற்றும் ஆலோசனை.</span></a>
+      <a class="card" href="https://complusmechanical.com/"><span class="role">நிறுவனர்</span><span class="name">Com+ Mechanical</span><span class="desc">நியூயார்க் நகரம் மற்றும் லாங் ஐலண்டில் உள்ள கட்டடங்களுக்கான வணிக வெப்பமூட்டல் மற்றும் குளிரூட்டல்.</span></a>
+      <div class="card nolink"><span class="role">நிறுவனர்</span><span class="name">AI Horizons Society</span><span class="desc">AI-யை மையமாகக் கொண்ட இலாப நோக்கற்ற அமைப்பு.</span></div>
+      <div class="card nolink"><span class="role">நிறுவனர்</span><span class="name">Long Island Tennis Club</span><span class="desc">லாங் ஐலண்டில் உள்ள இலாப நோக்கற்ற டென்னிஸ் கிளப்.</span></div>
     </div>
-    <p class="also">மேலும் நிறுவியவை: <a href="https://complusmechanical.com/">Com+ Mechanical</a> (வணிக HVAC) மற்றும் <a href="https://longislandhvacrepair.com/">Long Island HVAC Repair</a>.</p>
+    <p class="also">மேலும் நிறுவியது: <a href="https://longislandhvacrepair.com/">Long Island HVAC Repair</a>.</p>
   </section>
 
   <section id="press" class="wrap press" aria-label="ஊடகம்">
