@@ -7,6 +7,7 @@ import { logRun, writeResult } from "./store.ts";
 import type { ChannelId, CollectResult } from "./types.ts";
 import { emptyResult } from "./types.ts";
 import { redact } from "./http.ts";
+import { resolveTokens } from "./tokens.ts";
 
 const MAX_POSTS = 25;
 
@@ -34,7 +35,11 @@ Deno.serve(async (req) => {
   const now = new Date();
   now.setSeconds(0, 0);
   const capturedAt = now.toISOString();
-  const ctx = { env: (n: string) => Deno.env.get(n), fetch, now, maxPosts: MAX_POSTS };
+  const { overrides, notes } = await resolveTokens(db, (n) => Deno.env.get(n), fetch, now);
+  const ctx = { env: (n: string) => overrides[n] ?? Deno.env.get(n), fetch, now, maxPosts: MAX_POSTS };
+  const noteFor: Record<string, string | undefined> = {
+    instagram: notes.IG_ACCESS_TOKEN, threads: notes.THREADS_ACCESS_TOKEN,
+  };
 
   const summary = await Promise.all(channels.map(async (channel) => {
     const startedAt = new Date().toISOString();
@@ -52,6 +57,8 @@ Deno.serve(async (req) => {
         result = { ...result, status: "error", message: (e as Error).message };
       }
     }
+    const note = noteFor[channel];
+    if (note && result.status === "error") result = { ...result, message: `${result.message ?? ""} (${note})`.trim() };
     await logRun(db, channel, startedAt, result.status, rows, result.message);
     return { channel, status: result.status, rows, message: redact(result.message) };
   }));

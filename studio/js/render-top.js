@@ -95,8 +95,17 @@ export function renderChannels(summary, daily, el) {
   }));
 }
 
+// Pulls run every 3 hours; two missed runs in a row means the schedule or the function is down.
+const STALE_AFTER_MS = 7 * 3_600_000;
+
+export function isStale(s, now = Date.now()) {
+  if (s.ingest_mode !== "api" || !s.last_ingest_at) return false;
+  return now - new Date(s.last_ingest_at).getTime() > STALE_AFTER_MS;
+}
+
 export function statusChip(s) {
   if (s.ingest_mode === "manual" && !s.last_ingest_status) return h("span", { class: "chip manual", text: "manual" });
+  if (isStale(s)) return h("span", { class: "chip error", text: "stale", title: `No pull for 7+ hours. Check the cron job and the social-ingest function.${s.last_ingest_message ? ` Last message: ${s.last_ingest_message}` : ""}` });
   const st = s.last_ingest_status ?? "needs_token";
   const label = { ok: "API live", partial: "API partial", needs_token: "needs key", error: "API error", skipped: "manual" }[st] ?? st;
   return h("span", { class: `chip ${st}`, text: label, title: s.last_ingest_message ?? "" });

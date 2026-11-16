@@ -4,7 +4,15 @@ import { getJson, firstLine, mentionsAi, num } from "../http.ts";
 import type { AiCommentRow, Collector, CollectorContext, PostFormat, PostMetricRow } from "../types.ts";
 import { emptyResult } from "../types.ts";
 
-const BASE = "https://graph.instagram.com/v23.0";
+// Two token kinds work:
+// - Instagram Login token (IGAA…): graph.instagram.com, account addressed as /me.
+// - System-user token from a business portfolio (Unified login, never expires): graph.facebook.com,
+//   account addressed by its Instagram user id, set as IG_USER_ID.
+export function igApi(igUserId: string | undefined): { base: string; account: string } {
+  return igUserId
+    ? { base: "https://graph.facebook.com/v23.0", account: igUserId }
+    : { base: "https://graph.instagram.com/v23.0", account: "me" };
+}
 // Token goes in a header, never the URL, so it cannot leak through error messages or logs.
 const auth = (token: string) => ({ headers: { Authorization: `Bearer ${token}` } });
 
@@ -60,7 +68,7 @@ export function mapIgInsights(m: IgMedia, insights: IgInsight[]): PostMetricRow 
   };
 }
 
-async function insightsFor(ctx: CollectorContext, token: string, m: IgMedia): Promise<IgInsight[]> {
+async function insightsFor(ctx: CollectorContext, BASE: string, token: string, m: IgMedia): Promise<IgInsight[]> {
   const names = igMetricNames(igFormat(m));
   const url = (metrics: string[]) => `${BASE}/${m.id}/insights?metric=${metrics.join(",")}`;
   try {
@@ -71,7 +79,7 @@ async function insightsFor(ctx: CollectorContext, token: string, m: IgMedia): Pr
   }
 }
 
-async function aiCommentsFor(ctx: CollectorContext, token: string, m: IgMedia): Promise<AiCommentRow[]> {
+async function aiCommentsFor(ctx: CollectorContext, BASE: string, token: string, m: IgMedia): Promise<AiCommentRow[]> {
   const res = await getJson<{ data: IgComment[] }>(
     ctx.fetch,
     `${BASE}/${m.id}/comments?fields=id,text,username,timestamp&limit=50`, auth(token),
@@ -88,16 +96,17 @@ async function aiCommentsFor(ctx: CollectorContext, token: string, m: IgMedia): 
 export const collectInstagram: Collector = async (ctx) => {
   const token = ctx.env("IG_ACCESS_TOKEN");
   if (!token) return emptyResult("instagram", "needs_token", "Set IG_ACCESS_TOKEN");
-  const me = await getJson<{ followers_count?: number }>(ctx.fetch, `${BASE}/me?fields=user_id,username,followers_count`, auth(token));
+  const { base: BASE, account } = igApi(ctx.env("IG_USER_ID"));
+  const me = await getJson<{ followers_count?: number }>(ctx.fetch, `${BASE}/${account}?fields=username,followers_count`, auth(token));
   const media = await getJson<{ data: IgMedia[] }>(
-    ctx.fetch, `${BASE}/me/media?fields=id,caption,media_type,media_product_type,permalink,timestamp&limit=${ctx.maxPosts}`, auth(token),
+    ctx.fetch, `${BASE}/${account}/media?fields=id,caption,media_type,media_product_type,permalink,timestamp&limit=${ctx.maxPosts}`, auth(token),
   );
   const result = { ...emptyResult("instagram", "ok"), followers: num(me.followers_count) };
   const problems: string[] = [];
   for (const m of media.data ?? []) {
     try {
-      result.posts.push(mapIgInsights(m, await insightsFor(ctx, token, m)));
-      result.aiComments.push(...await aiCommentsFor(ctx, token, m));
+      result.posts.push(mapIgInsights(m, await insightsFor(ctx, BASE, token, m)));
+      result.aiComments.push(...await aiCommentsFor(ctx, BASE, token, m));
     } catch (e) {
       problems.push(`${m.id}: ${(e as Error).message}`);
     }
