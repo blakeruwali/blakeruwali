@@ -105,7 +105,7 @@ export function isStale(s, now = Date.now()) {
 
 export function statusChip(s) {
   if (s.ingest_mode === "manual" && !s.last_ingest_status) return h("span", { class: "chip manual", text: "manual" });
-  if (isStale(s)) return h("span", { class: "chip error", text: "stale", title: "No pull for 7+ hours. Check the cron job and the social-ingest function." });
+  if (isStale(s)) return h("span", { class: "chip error", text: "stale", title: `No pull for 7+ hours. Check the cron job and the social-ingest function.${s.last_ingest_message ? ` Last message: ${s.last_ingest_message}` : ""}` });
   const st = s.last_ingest_status ?? "needs_token";
   const label = { ok: "API live", partial: "API partial", needs_token: "needs key", error: "API error", skipped: "manual" }[st] ?? st;
   return h("span", { class: `chip ${st}`, text: label, title: s.last_ingest_message ?? "" });

@@ -5,7 +5,11 @@ import type { SupabaseClient } from "npm:@supabase/supabase-js@2.45.4";
 import { getJson } from "./http.ts";
 
 type FetchFn = typeof fetch;
-export interface StoredToken { env_name: string; access_token: string; expires_at: string | null; refreshed_at: string }
+export interface StoredToken {
+  env_name: string; access_token: string; expires_at: string | null; refreshed_at: string;
+  // SHA-256 of the secret this token was renewed from, so a newly set secret can be detected.
+  source_hash: string | null;
+}
 
 export const REFRESHABLE: Record<string, string> = {
   IG_ACCESS_TOKEN: "https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token",
@@ -13,6 +17,11 @@ export const REFRESHABLE: Record<string, string> = {
 };
 const DAY = 86_400_000;
 const REFRESH_EVERY_DAYS = 7;
+
+export async function sha256Hex(text: string): Promise<string> {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+  return Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, "0")).join("");
+}
 
 // Renew when never renewed by us, or when the last renewal is a week old.
 export function needsRefresh(stored: StoredToken | undefined, now: Date): boolean {
@@ -43,8 +52,13 @@ export async function resolveTokens(
   }
   const stored = new Map((data as StoredToken[] ?? []).map((t) => [t.env_name, t]));
   for (const name of Object.keys(REFRESHABLE)) {
-    const s = stored.get(name);
-    const current = s?.access_token ?? env(name);
+    const saved = stored.get(name);
+    const envToken = env(name);
+    const envHash = envToken ? await sha256Hex(envToken) : null;
+    // A secret set by hand after the last renewal (for example after a token was revoked) wins over
+    // the saved token; otherwise the saved, newer token is used.
+    const s = saved && (!envHash || saved.source_hash === envHash) ? saved : undefined;
+    const current = s?.access_token ?? envToken;
     if (!current) continue;
     // A system-user token (used together with IG_USER_ID) never expires and has no refresh endpoint.
     if (name === "IG_ACCESS_TOKEN" && env("IG_USER_ID")) { overrides[name] = env(name)!; continue; }
@@ -54,6 +68,7 @@ export async function resolveTokens(
       const fresh = await refreshToken(fetchFn, name, current, now);
       const { error: saveErr } = await db.rpc("save_platform_token", {
         p_env_name: name, p_access_token: fresh.access_token, p_expires_at: fresh.expires_at,
+        p_source_hash: envHash ?? s?.source_hash ?? null,
       });
       if (saveErr) throw new Error(`could not save renewed token: ${saveErr.message}`);
       overrides[name] = fresh.access_token;
