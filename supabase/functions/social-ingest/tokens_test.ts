@@ -51,3 +51,12 @@ Deno.test("failed renewal keeps the current token and notes why, without leaking
   assertEquals(overrides.IG_ACCESS_TOKEN, "secret-ig");
   assertEquals(notes.IG_ACCESS_TOKEN.includes("secret-ig"), false);
 });
+
+Deno.test("system-user Instagram token (IG_USER_ID set) is never renewed", async () => {
+  const { db, saved } = fakeDb([]);
+  const env = (n: string) => ({ IG_ACCESS_TOKEN: "suat", IG_USER_ID: "1784" } as Record<string, string>)[n];
+  const { overrides, notes } = await resolveTokens(db, env, okFetch("x") as typeof fetch, now);
+  assertEquals(overrides.IG_ACCESS_TOKEN, "suat");
+  assertEquals(saved.length, 0);
+  assertEquals(notes, {});
+});

@@ -46,6 +46,8 @@ export async function resolveTokens(
     const s = stored.get(name);
     const current = s?.access_token ?? env(name);
     if (!current) continue;
+    // A system-user token (used together with IG_USER_ID) never expires and has no refresh endpoint.
+    if (name === "IG_ACCESS_TOKEN" && env("IG_USER_ID")) { overrides[name] = env(name)!; continue; }
     overrides[name] = current;
     if (!needsRefresh(s, now)) continue;
     try {

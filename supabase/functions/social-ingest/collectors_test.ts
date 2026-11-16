@@ -96,3 +96,9 @@ Deno.test("network errors from fetch are redacted", async () => {
   try { await getJson(boom as never, "https://graph.instagram.com/me?access_token=SECRET123"); } catch (e) { msg = (e as Error).message; }
   assertEquals(msg.includes("SECRET123"), false);
 });
+
+Deno.test("instagram picks the Graph host by token kind", async () => {
+  const { igApi } = await import("./collectors/instagram.ts");
+  assertEquals(igApi(undefined), { base: "https://graph.instagram.com/v23.0", account: "me" });
+  assertEquals(igApi("1784"), { base: "https://graph.facebook.com/v23.0", account: "1784" });
+});
